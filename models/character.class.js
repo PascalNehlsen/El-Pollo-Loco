@@ -32,6 +32,7 @@ class Character extends MovableObject {
         this.x += this.speed;
         this.otherDirection = false;
         this.walking_sound.play();
+        this.walking_sound.playbackRate = 3;
       }
     }, 1000 / 60)
 
