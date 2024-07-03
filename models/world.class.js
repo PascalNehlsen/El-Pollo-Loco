@@ -28,12 +28,30 @@ class World {
     }, 200)
   }
 
-  checkThrowObjects() {
-    if (this.keyboard.D) {
-      let bottle = new ThrowableObject(this.character.x + 70, this.character.y + 150, this.character.otherDirection);
-      this.throwableObjects.push(bottle)
+  bottlePosition() {
+    if (!this.character.otherDirection) {
+      return {
+        x: this.character.x + 70,
+        y: this.character.y + 150,
+        direction: this.character.otherDirection
+      };
+    } else {
+      return {
+        x: this.character.x,
+        y: this.character.y + 150,
+        direction: this.character.otherDirection
+      };
     }
   }
+
+  checkThrowObjects() {
+    if (this.keyboard.D) {
+      let position = this.bottlePosition(); // Call the method on the instance
+      let bottle = new ThrowableObject(position);
+      this.throwableObjects.push(bottle);
+    }
+  }
+
 
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {

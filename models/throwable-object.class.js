@@ -1,13 +1,13 @@
 class ThrowableObject extends MovableObject {
-    constructor(x, y, otherDirection) {
+    constructor(position) {
         super().loadImage(
             './img/7_statusbars/3_icons/icon_salsa_bottle.png'
         );
-        this.x = x;
-        this.y = y;
+        this.x = position.x;
+        this.y = position.y;
         this.height = 80;
         this.width = 80;
-        this.otherDirection = otherDirection;
+        this.otherDirection = position.direction;
         this.throw();
     }
 
@@ -21,10 +21,7 @@ class ThrowableObject extends MovableObject {
 
     moveBottle() {
         if (this.y >= 370) {
-            this.speedY = 0;
-            this.x += 10;
-            this.y += 10;
-            this.broken = true;
+            // this.broken = true;
         } else if (this.otherDirection) {
             this.x -= 10;
         } else {
