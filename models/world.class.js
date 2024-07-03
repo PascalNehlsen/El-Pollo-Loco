@@ -6,6 +6,7 @@ class World {
   keyboard;
   camera_x = 0;
   statusbar = new StatusBar();
+  throwableObjects = [];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext('2d');
@@ -13,22 +14,34 @@ class World {
     this.keyboard = keyboard;
     this.draw();
     this.setWorld();
-    this.checkCollisions();
+    this.run();
   }
 
   setWorld() {
     this.character.world = this;
   }
 
-  checkCollisions() {
+  run() {
     setInterval(() => {
-      this.level.enemies.forEach((enemy) => {
-        if (this.character.isColliding(enemy)) {
-          this.character.hit()
-          this.statusbar.setPercentage(this.character.energy);
-        };
-      })
+      this.checkCollisions();
+      this.checkThrowObjects();
     }, 200)
+  }
+
+  checkThrowObjects() {
+    if (this.keyboard.D) {
+      let bottle = new ThrowableObject(this.character.x + 70, this.character.y + 150, this.character.otherDirection);
+      this.throwableObjects.push(bottle)
+    }
+  }
+
+  checkCollisions() {
+    this.level.enemies.forEach((enemy) => {
+      if (this.character.isColliding(enemy)) {
+        this.character.hit()
+        this.statusbar.setPercentage(this.character.energy);
+      };
+    })
   }
 
   draw() {
@@ -38,23 +51,20 @@ class World {
       this.canvas.width,
       this.canvas.height
     );
+
     this.ctx.translate(this.camera_x, 0);
-
     this.addObjectsToMap(this.level.backgroundObjects);
-
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusbar);
     this.ctx.translate(this.camera_x, 0);
-
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.throwableObjects);
     this.addObjectsToMap(this.level.clouds);
-
     this.ctx.translate(-this.camera_x, 0);
 
-    let self = this;
-    requestAnimationFrame(function () {
-      self.draw();
+    requestAnimationFrame(() => {
+      this.draw();
     });
   }
 
