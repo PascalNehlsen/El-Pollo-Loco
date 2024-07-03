@@ -7,11 +7,30 @@ class MovableObject {
   imgCache = {};
   currentImage = 0;
   speed = 0.15
+  speedY = 0;
+  acceleration = 2.5;
   otherDirection = false;
+
+  applyGravity() {
+    setInterval(() => {
+      if (this.isAboveGround() || this.speedY > 0) {
+        this.y -= this.speedY;
+        this.speedY -= this.acceleration;
+      }
+    }, 1000 / 25)
+  }
+
+  jump() {
+    this.speedY = 30;
+  }
 
   loadImage(path) {
     this.img = new Image();
     this.img.src = path;
+  }
+
+  isAboveGround() {
+    return this.y < 140;
   }
 
   loadImages(arr) {
@@ -30,12 +49,10 @@ class MovableObject {
   }
 
   moveRight() {
-    console.log('moving right');
+    this.x += this.speed;
   }
 
   moveLeft() {
-    setInterval(() => {
-      this.x -= this.speed;
-    }, 1000 / 60);
+    this.x -= this.speed;
   }
 }
