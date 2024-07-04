@@ -40,6 +40,13 @@ class Character extends MovableObject {
     './img/2_character_pepe/4_hurt/H-43.png'
   ]
 
+  offset = {
+    left: 15,
+    top: 110,
+    right: 15,
+    bottom: 15
+  };
+
   world;
   speed = 10;
   walking_sound = new Audio('./audio/footsteps.mp3');
