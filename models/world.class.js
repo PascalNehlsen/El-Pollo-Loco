@@ -10,6 +10,8 @@ class World {
   statusbarCoins = new StatusBarCoins();
   statusBarEndboss = new StatusBarEndboss();
   throwableObjects = [];
+  collectedCoins = [];
+  collectedBottles = [];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext('2d');
@@ -49,7 +51,7 @@ class World {
 
   checkThrowObjects() {
     if (this.keyboard.D) {
-      let position = this.bottlePosition(); // Call the method on the instance
+      let position = this.bottlePosition();
       let bottle = new ThrowableObject(position);
       this.throwableObjects.push(bottle);
     }
@@ -57,6 +59,26 @@ class World {
 
 
   checkCollisions() {
+    this.checkCharacterCollisions();
+    this.collectCoins();
+  }
+
+  collectCoins() {
+    this.level.coins.forEach((coin, i) => {
+      if (this.character.isColliding(coin)) {
+        this.level.coins.splice(i, 1);
+        this.collectedCoins.push(coin);
+        this.countCoins();
+      }
+    })
+  }
+
+  countCoins() {
+    this.statusbarCoins.coinsAmount = this.collectedCoins.length;
+    this.statusbarCoins.getCoins(this.statusbarCoins.coinsAmount);
+  }
+
+  checkCharacterCollisions() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         this.character.hit()

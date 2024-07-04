@@ -21,21 +21,21 @@ class StatusBarCoins extends DrawableObject {
     }
 
     getCoins(coinsAmount) {
-        this.coinsAmount = coinsAmount;
+        coinsAmount = this.coinsAmount;
         let path = this.imagesCoins[this.countCoins()];
         this.img = this.imgCache[path];
     }
 
     countCoins() {
-        if (this.coinsAmount == 100) {
+        if (this.coinsAmount >= 10) {
             return 5;
-        } else if (this.coinsAmount > 80) {
+        } else if (this.coinsAmount >= 8) {
             return 4;
-        } else if (this.coinsAmount > 60) {
+        } else if (this.coinsAmount >= 6) {
             return 3;
-        } else if (this.coinsAmount > 40) {
+        } else if (this.coinsAmount >= 4) {
             return 2;
-        } else if (this.coinsAmount > 20) {
+        } else if (this.coinsAmount >= 2) {
             return 1;
         } else {
             return 0;
