@@ -43,6 +43,7 @@ class Character extends MovableObject {
   world;
   speed = 10;
   walking_sound = new Audio('./audio/footsteps.mp3');
+  jump_sound = new Audio('./audio/jump.mp3')
 
   constructor() {
     super().loadImage(
@@ -79,6 +80,8 @@ class Character extends MovableObject {
 
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         this.jump()
+        this.jump_sound.play();
+        this.jump_sound.playbackRate = 1.5;
       }
       this.world.camera_x = -this.x + 100;
     }, 1000 / 60)

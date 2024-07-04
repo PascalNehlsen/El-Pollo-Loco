@@ -1,4 +1,6 @@
 class ThrowableObject extends MovableObject {
+    throw_sound = new Audio('./audio/throw.mp3')
+
     constructor(position) {
         super().loadImage(
             './img/7_statusbars/3_icons/icon_salsa_bottle.png'
@@ -17,6 +19,7 @@ class ThrowableObject extends MovableObject {
         setInterval(() => {
             this.moveBottle();
         }, 25);
+        this.throw_sound.play();
     }
 
     moveBottle() {
