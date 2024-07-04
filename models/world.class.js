@@ -12,6 +12,7 @@ class World {
   throwableObjects = [];
   collectedCoins = [];
   collectedBottles = [];
+  collect_coin_sound = new Audio('./audio/collect-coin.mp3');
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext('2d');
@@ -57,7 +58,6 @@ class World {
     }
   }
 
-
   checkCollisions() {
     this.checkCharacterCollisions();
     this.collectCoins();
@@ -66,11 +66,12 @@ class World {
   collectCoins() {
     this.level.coins.forEach((coin, i) => {
       if (this.character.isColliding(coin)) {
+        this.collect_coin_sound.play();
         this.level.coins.splice(i, 1);
         this.collectedCoins.push(coin);
         this.countCoins();
       }
-    })
+    });
   }
 
   countCoins() {
