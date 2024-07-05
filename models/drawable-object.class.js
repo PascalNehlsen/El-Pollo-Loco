@@ -7,6 +7,14 @@ class DrawableObject {
     height = 150;
     width = 100;
 
+    constructor() {
+        this.statusbar_full_sound = new Audio('./audio/bar-full.mp3');
+    }
+
+    playStatusbarFullSound() {
+        this.statusbar_full_sound.play(); // Methode zum Abspielen des Sounds
+    }
+
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;

@@ -60,6 +60,17 @@ class World {
     }
   }
 
+  pickUpBottles() {
+    this.level.bottles.forEach((bottle, i) => {
+      if (this.character.isColliding(bottle)) {
+        this.collect_coin_sound.play();
+        this.level.bottles.splice(i, 1);
+        this.collectedBottles.push(bottle);
+        this.countBottles();
+      }
+    });
+  }
+
   checkCollisions() {
     this.checkCharacterCollisions();
     this.collectObjects();
@@ -77,17 +88,6 @@ class World {
         this.level.coins.splice(i, 1);
         this.collectedCoins.push(coin);
         this.countCoins();
-      }
-    });
-  }
-
-  pickUpBottles() {
-    this.level.bottles.forEach((bottle, i) => {
-      if (this.character.isColliding(bottle)) {
-        this.collect_coin_sound.play();
-        this.level.bottles.splice(i, 1);
-        this.collectedBottles.push(bottle);
-        this.countBottles();
       }
     });
   }

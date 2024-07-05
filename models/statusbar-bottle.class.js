@@ -28,6 +28,7 @@ class StatusBarBottle extends DrawableObject {
 
     countBottles() {
         if (this.bottleAmount >= 10) {
+            this.playStatusbarFullSound();
             return 5;
         } else if (this.bottleAmount >= 8) {
             return 4;
