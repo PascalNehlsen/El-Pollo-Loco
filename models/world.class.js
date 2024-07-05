@@ -81,6 +81,15 @@ class World {
     this.pickUpBottles();
   }
 
+  checkCharacterCollisions() {
+    this.level.enemies.forEach((enemy) => {
+      if (this.character.isColliding(enemy)) {
+        this.character.hit()
+        this.statusbarHp.setPercentage(this.character.energy);
+      }
+    })
+  }
+
   pickUpCoins() {
     this.level.coins.forEach((coin, i) => {
       if (this.character.isColliding(coin)) {
@@ -100,15 +109,6 @@ class World {
   countCoins() {
     this.statusbarCoins.coinsAmount = this.collectedCoins.length;
     this.statusbarCoins.getCoins(this.statusbarCoins.coinsAmount);
-  }
-
-  checkCharacterCollisions() {
-    this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
-        this.character.hit()
-        this.statusbarHp.setPercentage(this.character.energy);
-      };
-    })
   }
 
   draw() {

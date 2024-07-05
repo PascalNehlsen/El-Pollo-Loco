@@ -28,10 +28,13 @@ class StatusBarCoins extends DrawableObject {
     }
 
     countCoins() {
-        if (this.coinsAmount >= 10) {
+        if (this.coinsAmount == 10) {
             this.playStatusbarFullSound();
             return 5;
-        } else if (this.coinsAmount >= 8) {
+        } else if (this.coinsAmount >= 10) {
+            return 5;
+        }
+        else if (this.coinsAmount >= 8) {
             return 4;
         } else if (this.coinsAmount >= 6) {
             return 3;
