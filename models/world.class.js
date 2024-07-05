@@ -31,7 +31,7 @@ class World {
     setInterval(() => {
       this.checkCollisions();
       this.checkThrowObjects();
-    }, 200)
+    }, 100)
   }
 
   bottlePosition() {
@@ -51,19 +51,26 @@ class World {
   }
 
   checkThrowObjects() {
-    if (this.keyboard.D) {
+    if (this.keyboard.D && this.collectedBottles.length >= 1) {
+      this.collectedBottles.splice(0, 1);
       let position = this.bottlePosition();
       let bottle = new ThrowableObject(position);
       this.throwableObjects.push(bottle);
+      this.countBottles();
     }
   }
 
   checkCollisions() {
     this.checkCharacterCollisions();
-    this.collectCoins();
+    this.collectObjects();
   }
 
-  collectCoins() {
+  collectObjects() {
+    this.pickUpCoins();
+    this.pickUpBottles();
+  }
+
+  pickUpCoins() {
     this.level.coins.forEach((coin, i) => {
       if (this.character.isColliding(coin)) {
         this.collect_coin_sound.play();
@@ -72,6 +79,22 @@ class World {
         this.countCoins();
       }
     });
+  }
+
+  pickUpBottles() {
+    this.level.bottles.forEach((bottle, i) => {
+      if (this.character.isColliding(bottle)) {
+        this.collect_coin_sound.play();
+        this.level.bottles.splice(i, 1);
+        this.collectedBottles.push(bottle);
+        this.countBottles();
+      }
+    });
+  }
+
+  countBottles() {
+    this.statusbarBottle.bottleAmount = this.collectedBottles.length;
+    this.statusbarBottle.getBottles(this.statusbarBottle.bottleAmount);
   }
 
   countCoins() {
