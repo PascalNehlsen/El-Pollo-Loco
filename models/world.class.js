@@ -77,7 +77,6 @@ class World {
   checkCollisions() {
     this.checkCharacterCollisions();
     this.collectObjects();
-    // this.checkBottleCollision();
     this.checkChickenKills();
   }
 
@@ -109,18 +108,10 @@ class World {
     }
   }
 
-  // checkBottleCollision(chicken) {
-  //   this.throwableObjects.forEach(bottle => {
-  //     if (bottle.isColliding(chicken)) {
-  //       // this.character.killByThrow(bottle, chicken);
-  //       console.log('treffer');
-  //     }
-  //   });
-  // }
-
   checkKillByThrow(chicken) {
     this.throwableObjects.forEach(bottle => {
       if (bottle.isColliding(chicken)) {
+        // this.character.bottleExplosion();
         this.character.killByThrow(bottle, chicken);
       }
     });

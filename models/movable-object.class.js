@@ -75,4 +75,11 @@ class MovableObject extends DrawableObject {
   isDead() {
     return this.energy == 0;
   }
+
+  // bottleExplosion() {
+  //   this.loadImages(this.imagesExplosion)
+  //   setInterval(() => {
+  //     this.playAnimation(this.imagesExplosion)
+  //   }, 25);
+  // }
 }
