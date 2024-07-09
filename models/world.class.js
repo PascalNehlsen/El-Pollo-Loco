@@ -74,6 +74,9 @@ class World {
   checkCollisions() {
     this.checkCharacterCollisions();
     this.collectObjects();
+    // this.checkBottleCollision();
+    this.checkChickenKills();
+
   }
 
   collectObjects() {
@@ -89,6 +92,52 @@ class World {
       }
     })
   }
+
+  checkChickenKills() {
+    this.level.enemies.forEach(chicken => {
+      if (chicken instanceof Endboss) return;
+      this.checkKillByJump(chicken);
+      this.checkKillByThrow(chicken);
+    });
+  }
+
+  checkKillByJump(chicken) {
+    if (this.character.isJumpingOn(chicken)) {
+      this.character.killByJump(chicken);
+    }
+  }
+
+  // checkBottleCollision(chicken) {
+  //   this.throwableObjects.forEach(bottle => {
+  //     if (bottle.isColliding(chicken)) {
+  //       // this.character.killByThrow(bottle, chicken);
+  //       console.log('treffer');
+  //     }
+  //   });
+  // }
+
+  checkKillByThrow(chicken) {
+    this.throwableObjects.forEach(bottle => {
+      if (bottle.isColliding(chicken)) {
+        this.character.killByThrow(bottle, chicken);
+      }
+    });
+  }
+
+  deleteThrownBottle(bottle) {
+    setTimeout(() => {
+      let bottleIndex = this.throwableObjects.indexOf(bottle);
+      this.throwableObjects.splice(bottleIndex, 1);
+    }, 300);
+  }
+
+  deleteDeadEnemy(enemy) {
+    setTimeout(() => {
+      let enemyIndex = this.level.enemies.indexOf(enemy);
+      this.level.enemies.splice(enemyIndex, 1);
+    }, 300);
+  }
+
 
   pickUpCoins() {
     this.level.coins.forEach((coin, i) => {

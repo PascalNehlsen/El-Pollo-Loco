@@ -41,9 +41,9 @@ class Character extends MovableObject {
   ]
 
   offset = {
-    left: 15,
+    left: 50,
     top: 110,
-    right: 15,
+    right: 50,
     bottom: 15
   };
 
@@ -104,5 +104,25 @@ class Character extends MovableObject {
         this.playAnimation(this.imagesWalking);
       }
     }, 40);
+  }
+
+  isJumpingOn(obj) {
+    return this.isColliding(obj) && this.isAboveGround();
+  }
+
+  killByThrow(bottle, enemy) {
+    if (enemy.isDead()) return;
+    enemy.hit();
+    this.world.deleteThrownBottle(bottle);
+    this.world.deleteDeadEnemy(enemy);
+  }
+
+  killByJump(enemy) {
+    if (enemy.isDead()) return;
+    // enemy.hit();
+    // enemy.smash_sound.currentTime = 0;
+    // this.world.playSoundIfSwitchedOn(enemy.smash_sound);
+    this.world.deleteDeadEnemy(enemy);
+    this.jump();
   }
 }
