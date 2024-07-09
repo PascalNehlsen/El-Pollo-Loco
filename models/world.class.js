@@ -29,9 +29,12 @@ class World {
 
   run() {
     setInterval(() => {
-      this.checkCollisions();
       this.checkThrowObjects();
     }, 100)
+
+    setInterval(() => {
+      this.checkCollisions();
+    }, 25);
   }
 
   bottlePosition() {
@@ -76,7 +79,6 @@ class World {
     this.collectObjects();
     // this.checkBottleCollision();
     this.checkChickenKills();
-
   }
 
   collectObjects() {
@@ -134,10 +136,11 @@ class World {
   deleteDeadEnemy(enemy) {
     setTimeout(() => {
       let enemyIndex = this.level.enemies.indexOf(enemy);
-      this.level.enemies.splice(enemyIndex, 1);
+      if (enemyIndex !== -1 && this.level.enemies[enemyIndex] instanceof Chicken) {
+        this.level.enemies.splice(enemyIndex, 1);
+      }
     }, 300);
   }
-
 
   pickUpCoins() {
     this.level.coins.forEach((coin, i) => {

@@ -38,7 +38,7 @@ class Chicken extends MovableObject {
 
   playChickenAnimations() {
     setInterval(() => {
-      if (this.isDead()) {
+      if (this.energy == 0) {
         this.playAnimation(this.imagesDead);
       } else {
         this.playAnimation(this.imagesWalking);

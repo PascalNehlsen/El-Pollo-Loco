@@ -118,8 +118,8 @@ class Character extends MovableObject {
   }
 
   killByJump(enemy) {
-    if (enemy.isDead()) return;
-    // enemy.hit();
+    enemy.energy = 0;
+    console.log(enemy);
     // enemy.smash_sound.currentTime = 0;
     // this.world.playSoundIfSwitchedOn(enemy.smash_sound);
     this.world.deleteDeadEnemy(enemy);
