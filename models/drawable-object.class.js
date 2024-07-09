@@ -12,7 +12,7 @@ class DrawableObject {
     }
 
     playStatusbarFullSound() {
-        this.statusbar_full_sound.play(); // Methode zum Abspielen des Sounds
+        this.statusbar_full_sound.play();
     }
 
     loadImage(path) {

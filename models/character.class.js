@@ -40,6 +40,32 @@ class Character extends MovableObject {
     './img/2_character_pepe/4_hurt/H-43.png'
   ]
 
+  imagesIdle = [
+    './img/2_character_pepe/1_idle/idle/I-1.png',
+    './img/2_character_pepe/1_idle/idle/I-2.png',
+    './img/2_character_pepe/1_idle/idle/I-3.png',
+    './img/2_character_pepe/1_idle/idle/I-4.png',
+    './img/2_character_pepe/1_idle/idle/I-5.png',
+    './img/2_character_pepe/1_idle/idle/I-6.png',
+    './img/2_character_pepe/1_idle/idle/I-7.png',
+    './img/2_character_pepe/1_idle/idle/I-8.png',
+    './img/2_character_pepe/1_idle/idle/I-9.png',
+    './img/2_character_pepe/1_idle/idle/I-10.png'
+  ]
+
+  imagesLongIdle = [
+    './img/2_character_pepe/1_idle/long_idle/I-11.png',
+    './img/2_character_pepe/1_idle/long_idle/I-12.png',
+    './img/2_character_pepe/1_idle/long_idle/I-13.png',
+    './img/2_character_pepe/1_idle/long_idle/I-14.png',
+    './img/2_character_pepe/1_idle/long_idle/I-15.png',
+    './img/2_character_pepe/1_idle/long_idle/I-16.png',
+    './img/2_character_pepe/1_idle/long_idle/I-17.png',
+    './img/2_character_pepe/1_idle/long_idle/I-18.png',
+    './img/2_character_pepe/1_idle/long_idle/I-19.png',
+    './img/2_character_pepe/1_idle/long_idle/I-20.png'
+  ]
+
   offset = {
     left: 50,
     top: 110,
@@ -51,12 +77,15 @@ class Character extends MovableObject {
   speed = 10;
   walking_sound = new Audio('./audio/footsteps.mp3');
   jump_sound = new Audio('./audio/jump.mp3')
+  snore_sound = new Audio('./audio/snore.mp3')
 
   constructor() {
     super().loadImage(
-      './img/2_character_pepe/2_walk/W-21.png'
+      './img/2_character_pepe/1_idle/long_idle/I-11.png'
     );
     this.applyGravity();
+    this.loadImages(this.imagesIdle);
+    this.loadImages(this.imagesLongIdle);
     this.loadImages(this.imagesWalking);
     this.loadImages(this.imagesJumping);
     this.loadImages(this.imagesDead);
@@ -66,6 +95,7 @@ class Character extends MovableObject {
 
   animate() {
     setInterval(() => {
+
       this.walking_sound.pause();
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
@@ -96,14 +126,20 @@ class Character extends MovableObject {
     setInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.imagesDead);
-      } else if (this.isHurt()) {
+      } else if (this.isHurt() && !this.isAboveGround()) {
         this.playAnimation(this.imagesHurt);
-      } else if (this.isAboveGround()) {
-        this.playAnimation(this.imagesJumping);
       } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
         this.playAnimation(this.imagesWalking);
       }
     }, 40);
+    setInterval(() => {
+      if (this.x < 100 && this.energy == 100) {
+        this.playAnimation(this.imagesLongIdle);
+      };
+      if (this.isAboveGround()) {
+        this.playAnimation(this.imagesJumping);
+      }
+    }, 200);
   }
 
   isJumpingOn(obj) {
@@ -111,15 +147,13 @@ class Character extends MovableObject {
   }
 
   killByThrow(bottle, enemy) {
-    if (enemy.isDead()) return;
-    enemy.hit();
+    enemy.energy = 0;
     this.world.deleteThrownBottle(bottle);
     this.world.deleteDeadEnemy(enemy);
   }
 
   killByJump(enemy) {
     enemy.energy = 0;
-    console.log(enemy);
     // enemy.smash_sound.currentTime = 0;
     // this.world.playSoundIfSwitchedOn(enemy.smash_sound);
     this.world.deleteDeadEnemy(enemy);
