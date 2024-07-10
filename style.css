@@ -1,9 +1,50 @@
+@font-face {
+  font-family: Zabars;
+  src: url(./fonts/Zabars.ttf);
+}
+
 body {
   display: flex;
+  font-family: 'Zabars', sans-serif;
+  letter-spacing: 8px;
+  font-size: 42px;
   align-items: center;
   flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  min-height: 100vh;
+  background-image: url(./img/desert.png);
+  background-position: center;
+  text-shadow: 4px 4px 2px rgba(160, 34, 10);
+}
+
+h1 {
+  margin-bottom: 20px;
+  margin-top: 0;
 }
 
 canvas {
   background-color: black;
+  display: block;
+}
+
+@media only screen and (max-width: 760px) {
+  canvas {
+    width: 100%;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 48px;
+  }
+}
+
+@media only screen and (max-height: 480px) {
+  canvas {
+    height: 100vh;
+  }
+
+  h1 {
+    display: none;
+  }
 }
