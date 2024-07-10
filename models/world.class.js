@@ -111,7 +111,6 @@ class World {
   checkKillByThrow(chicken) {
     this.throwableObjects.forEach(bottle => {
       if (bottle.isColliding(chicken)) {
-        // this.character.bottleExplosion();
         this.character.killByThrow(bottle, chicken);
       }
     });

@@ -1,7 +1,7 @@
 class MovableObject extends DrawableObject {
   speed = 0.15
   speedY = 0;
-  acceleration = 2.5;
+  acceleration = 3;
   otherDirection = false;
   energy = 100;
   lastHit = 0;
@@ -76,10 +76,4 @@ class MovableObject extends DrawableObject {
     return this.energy == 0;
   }
 
-  // bottleExplosion() {
-  //   this.loadImages(this.imagesExplosion)
-  //   setInterval(() => {
-  //     this.playAnimation(this.imagesExplosion)
-  //   }, 25);
-  // }
 }
