@@ -21,11 +21,13 @@ class World {
     this.draw();
     this.setWorld();
     this.run();
+    this.character.x;
   }
 
   setWorld() {
     this.character.world = this;
   }
+
 
   run() {
     setInterval(() => {
@@ -35,6 +37,21 @@ class World {
     setInterval(() => {
       this.checkCollisions();
     }, 25);
+
+    setInterval(() => {
+      this.checkIfCharacterIsDead();
+    }, 50);
+  }
+
+  checkIfCharacterIsDead() {
+    if (this.character.energy <= 0) {
+      document.getElementById('game-over').style.display = 'block';
+      this.clearAllIntervals();
+    }
+  }
+
+  clearAllIntervals() {
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
   }
 
   bottlePosition() {

@@ -15,20 +15,46 @@ body {
   min-height: 100vh;
   background-image: url(./img/desert.png);
   background-position: center;
-  text-shadow: 4px 4px 2px rgba(160, 34, 10);
+  text-shadow: 4px 4px 2px rgb(201, 131, 69);
   position: relative;
 }
 
 h1 {
   margin-bottom: 20px;
   margin-top: 0;
+  color: rgb(37, 36, 36);
 }
 
 canvas {
   background-color: black;
   display: block;
   border-radius: 10px;
-  box-shadow: 0px 0px 6px 6px rgba(82, 16, 3, 0.7);
+  box-shadow: 0px 0px 6px 6px rgb(201, 131, 69);
+}
+
+.gameover-screen {
+  position: absolute;
+  width: 720px;
+  height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gameover-screen-container {
+  position: absolute;
+  width: 720px;
+  height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 285px;
+  overflow: hidden;
+}
+
+.gameover-screen-container img {
+  border-radius: 10px;
+  scale: 1.5;
 }
 
 .overlay-screen {

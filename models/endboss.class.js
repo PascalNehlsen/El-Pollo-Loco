@@ -51,8 +51,22 @@ class Endboss extends MovableObject {
         this.x = 4500;
         this.animate()
     }
+
     animate() {
+        let i = 0;
         setInterval(() => {
+            // if (i < 10) {
+            //     this.playAnimation(this.imagesWalking);
+            // } else {
+            //     this.playAnimation(this.imagesAlert);
+            // }
+
+            // i++;
+
+            // if (this.Character.x > 3000 && !this.hadFirstContact) {
+            //     i = 0;
+            //     this.hadFirstContact = true;
+            // }
             this.playAnimation(this.imagesWalking)
         }, 200);
     }
