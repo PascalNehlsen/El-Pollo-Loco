@@ -16,6 +16,7 @@ body {
   background-image: url(./img/desert.png);
   background-position: center;
   text-shadow: 4px 4px 2px rgba(160, 34, 10);
+  position: relative;
 }
 
 h1 {
@@ -26,10 +27,46 @@ h1 {
 canvas {
   background-color: black;
   display: block;
+  border-radius: 10px;
+  box-shadow: 0px 0px 6px 6px rgba(82, 16, 3, 0.7);
+}
+
+.overlay-screen {
+  position: absolute;
+  width: 720px;
+  height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 285px;
+}
+
+.overlay-screen img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+#play-btn-img {
+  width: 240px;
+  height: auto;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  transition: all 250ms ease-in-out;
+}
+
+#play-btn-img:hover {
+  opacity: 0.8;
+  transition: all 250ms ease-in-out;
 }
 
 @media only screen and (max-width: 760px) {
   canvas {
+    width: 100%;
+  }
+
+  .overlay-screen {
     width: 100%;
   }
 

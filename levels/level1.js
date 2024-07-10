@@ -51,7 +51,14 @@ const level1 = new Level(
         new Coin()
     ],
 
-    [new Cloud()],
+    [
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud()
+    ],
     [
         new BackgroundObject(
             './img/5_background/layers/air.png',
