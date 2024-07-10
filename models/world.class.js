@@ -95,6 +95,7 @@ class World {
     this.checkCharacterCollisions();
     this.collectObjects();
     this.checkChickenKills();
+    // this.checkBossKill();
   }
 
   collectObjects() {
@@ -111,9 +112,18 @@ class World {
     })
   }
 
+  updateEndbossStatusbar(energy) {
+    this.statusBarEndboss.statusbarEndboss(energy);
+  }
+
+  // checkBossKill() {
+  //   let endboss = this.level.enemies.find(enemy => enemy instanceof Endboss);
+  //   this.character.hitEndboss(endboss);
+  // }
+
   checkChickenKills() {
     this.level.enemies.forEach(chicken => {
-      if (chicken instanceof Endboss) return;
+      // if (chicken instanceof Endboss) return;
       this.checkKillByJump(chicken);
       this.checkKillByThrow(chicken);
     });
@@ -125,10 +135,10 @@ class World {
     }
   }
 
-  checkKillByThrow(chicken) {
+  checkKillByThrow(obj) {
     this.throwableObjects.forEach(bottle => {
-      if (bottle.isColliding(chicken)) {
-        this.character.killByThrow(bottle, chicken);
+      if (bottle.isColliding(obj)) {
+        this.character.killByThrow(bottle, obj);
       }
     });
   }

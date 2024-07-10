@@ -147,7 +147,13 @@ class Character extends MovableObject {
   }
 
   killByThrow(bottle, enemy) {
-    enemy.energy = 0;
+    let bigChicken = this.world.level.enemies[this.world.level.enemies.length - 1];
+    if (enemy == bigChicken) {
+      enemy.hit();
+      this.world.updateEndbossStatusbar(enemy.energy);
+    } else {
+      enemy.energy = 0;
+    }
     this.world.deleteThrownBottle(bottle);
     this.world.deleteDeadEnemy(enemy);
   }
