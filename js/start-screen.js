@@ -5,7 +5,8 @@ function startGame() {
 
 function fullscreen() {
     let fullscreen = document.getElementById('canvas-container');
-    openFullscreen(fullscreen)
+    openFullscreen(fullscreen);
+    resizeCanvas();
 }
 
 function openFullscreen(elem) {
@@ -16,4 +17,11 @@ function openFullscreen(elem) {
     } else if (elem.msRequestFullscreen) {
         elem.msRequestFullscreen();
     }
+}
+
+function resizeCanvas() {
+    let canvas = document.getElementById('canvas');
+    canvas.style.height = '100%';
+    canvas.style.width = '100%';
+    canvas.style.borderRadius = 'unset'
 }
