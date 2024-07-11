@@ -76,7 +76,7 @@ class Character extends MovableObject {
   };
 
   world;
-  speed = 10;
+  speed = 5;
   walking_sound = new Audio('./audio/footsteps.mp3');
   jump_sound = new Audio('./audio/jump.mp3')
   snore_sound = new Audio('./audio/snore.mp3')
@@ -133,15 +133,18 @@ class Character extends MovableObject {
       } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
         this.playAnimation(this.imagesWalking);
       }
-    }, 40);
+    }, 60);
     setInterval(() => {
       if (this.x < 100 && this.energy == 100) {
         this.playAnimation(this.imagesLongIdle);
-      };
+        // this.snore_sound.play();
+      } else {
+        // this.snore_sound.pause();
+      }
       if (this.isAboveGround()) {
         this.playAnimation(this.imagesJumping);
       }
-    }, 200);
+    }, 150);
   }
 
   isJumpingOn(obj) {
@@ -153,6 +156,7 @@ class Character extends MovableObject {
     if (enemy == bigChicken) {
       if (!this.hasBeenHit) {
         enemy.hit();
+        console.log(enemy.energy);
         this.hasBeenHit = true;
         this.world.updateEndbossStatusbar(enemy.energy);
       }

@@ -79,8 +79,10 @@ class Endboss extends MovableObject {
             }
             if (this.energy <= 0) {
                 this.playAnimation(this.imagesDead);
-                document.getElementById('game-win').style.display = "block";
-                this.clearAllIntervals();
+                setTimeout(() => {
+                    document.getElementById('game-win').style.display = "block";
+                    this.clearAllIntervals();
+                }, 1000);
             }
         }, 200);
     }

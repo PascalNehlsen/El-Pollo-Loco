@@ -148,7 +148,7 @@ class World {
   deleteDeadEnemy(enemy) {
     setTimeout(() => {
       let enemyIndex = this.level.enemies.indexOf(enemy);
-      if (enemyIndex !== -1 && this.level.enemies[enemyIndex] instanceof Chicken) {
+      if (enemyIndex !== -1 && this.level.enemies[enemyIndex] instanceof Chicken || this.level.enemies[enemyIndex] instanceof BabyChicken) {
         this.level.enemies.splice(enemyIndex, 1);
       }
     }, 300);
@@ -216,7 +216,7 @@ class World {
     }
 
     mo.draw(this.ctx);
-    mo.drawFrame(this.ctx);
+    // mo.drawFrame(this.ctx);
 
     if (mo.otherDirection) {
       this.flipDirectionBack(mo);
