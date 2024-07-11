@@ -3,6 +3,8 @@ class Character extends MovableObject {
   width = 150;
   y = 140;
   x = 50;
+  hasBeenHit = false;
+
   imagesWalking = [
     './img/2_character_pepe/2_walk/W-21.png',
     './img/2_character_pepe/2_walk/W-22.png',
@@ -149,8 +151,11 @@ class Character extends MovableObject {
   killByThrow(bottle, enemy) {
     let bigChicken = this.world.level.enemies[this.world.level.enemies.length - 1];
     if (enemy == bigChicken) {
-      enemy.hit();
-      this.world.updateEndbossStatusbar(enemy.energy);
+      if (!this.hasBeenHit) {
+        enemy.hit();
+        this.hasBeenHit = true;
+        this.world.updateEndbossStatusbar(enemy.energy);
+      }
     } else {
       enemy.energy = 0;
     }

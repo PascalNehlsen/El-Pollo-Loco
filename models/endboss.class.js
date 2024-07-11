@@ -48,8 +48,13 @@ class Endboss extends MovableObject {
     constructor() {
         super().loadImage(this.imagesWalking[0]);
         this.loadImages(this.imagesWalking);
+        this.loadImages(this.imagesAlert);
+        this.loadImages(this.imagesAttack);
+        this.loadImages(this.imagesHurt);
+        this.loadImages(this.imagesDead);
         this.x = 4500;
-        this.animate()
+        this.speed = 10;
+        this.animate();
     }
 
     animate() {
@@ -67,7 +72,20 @@ class Endboss extends MovableObject {
             //     i = 0;
             //     this.hadFirstContact = true;
             // }
-            this.playAnimation(this.imagesWalking)
+            this.playAnimation(this.imagesAlert)
+            if (this.energy <= 90) {
+                this.playAnimation(this.imagesHurt);
+                this.moveLeft();
+            }
+            if (this.energy <= 0) {
+                this.playAnimation(this.imagesDead);
+                document.getElementById('game-win').style.display = "block";
+                this.clearAllIntervals();
+            }
         }, 200);
+    }
+
+    clearAllIntervals() {
+        for (let i = 1; i < 9999; i++) window.clearInterval(i);
     }
 }

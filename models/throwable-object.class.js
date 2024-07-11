@@ -1,5 +1,6 @@
 class ThrowableObject extends MovableObject {
     throw_sound = new Audio('./audio/throw.mp3')
+    break_sound = new Audio('./audio/bottle-break.mp3')
 
     imagesBottleRotation = [
         './img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
@@ -46,7 +47,7 @@ class ThrowableObject extends MovableObject {
     checkHit() {
         setInterval(() => {
             this.world.level.enemies.forEach(enemy => this.bottleExplosion(enemy));
-        }, 200);
+        }, 10);
     }
 
     moveBottle() {
@@ -61,7 +62,9 @@ class ThrowableObject extends MovableObject {
 
     bottleExplosion(enemy) {
         if (this.isColliding(enemy)) {
+
             this.playAnimation(this.imagesExplosion);
+            this.break_sound.play();
             // if (this.hasBeenThrown) return;
 
             // this.playSplashSound();
