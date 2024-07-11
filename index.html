@@ -37,20 +37,32 @@
 <body onload="init()">
     <h1>El Pollo Loco</h1>
 
-    <canvas id="canvas" width="720px" height="480px">
-    </canvas>
+    <div id="canvas-container" class="canvas-container">
 
-    <div id="start-screen" class="overlay-screen">
-        <img src="./img/9_intro_outro_screens/start/startscreen_1.png" alt="">
-        <img onclick="startGame()" id="play-btn-img" src="./img/start-screen/play.png" alt="">
-    </div>
+        <canvas id="canvas" width="720px" height="480px"> </canvas>
 
-    <div id="game-over" style="display: none;" class="gameover-screen-container">
-        <img class="gameover-screen" src="./img/9_intro_outro_screens/game_over/oh no you lost!.png" alt="">
-    </div>
 
-    <div id="game-win" style="display: none;" class="gameover-screen-container">
-        <img class="gameover-screen" src="./img/9_intro_outro_screens/win/win_2.png" alt="">
+        <div id="start-screen" class="overlay-screen">
+            <img src="./img/9_intro_outro_screens/start/startscreen_1.png" alt="">
+            <img onclick="startGame()" id="play-btn-img" src="./img/start-screen/play.png" alt="">
+        </div>
+
+        <img id="game-over" style="display: none;" class="gameover-screen"
+            src="./img/9_intro_outro_screens/game_over/oh no you lost!.png" alt="">
+
+        <img id="game-win" style="display: none;" class="gameover-screen"
+            src="./img/9_intro_outro_screens/win/win_2.png" alt="">
+
+        <div class="menu-bar" id="menu-bar">
+            <div>
+                <img onclick="startGame()" src="./img/icons/restart.png" alt="">
+            </div>
+            <div>
+                <img id="audio" src="./img/icons/audio-loud.png" alt="">
+                <img id="infos" src="./img/icons/infos.png" alt="">
+                <img onclick="fullscreen()" id="resize" src="./img/icons/resize.png" alt="">
+            </div>
+        </div>
     </div>
 
 </body>

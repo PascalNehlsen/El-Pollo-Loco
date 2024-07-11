@@ -13,6 +13,7 @@ class World {
   collectedCoins = [];
   collectedBottles = [];
   collect_coin_sound = new Audio('./audio/collect-coin.mp3');
+  firstContact = false;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext('2d');
@@ -191,7 +192,12 @@ class World {
     this.addToMap(this.statusbarHp);
     this.addToMap(this.statusbarBottle);
     this.addToMap(this.statusbarCoins);
-    this.addToMap(this.statusBarEndboss);
+    if (this.character.x >= 3850) {
+      this.firstContact = true;
+    }
+    if (this.firstContact) {
+      this.addToMap(this.statusBarEndboss);
+    }
     this.ctx.translate(this.camera_x, 0);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);

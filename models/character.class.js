@@ -130,7 +130,7 @@ class Character extends MovableObject {
         this.playAnimation(this.imagesDead);
       } else if (this.isHurt() && !this.isAboveGround()) {
         this.playAnimation(this.imagesHurt);
-      } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+      } else if (this.world.keyboard.RIGHT && !this.isAboveGround() || this.world.keyboard.LEFT && !this.isAboveGround()) {
         this.playAnimation(this.imagesWalking);
       }
     }, 60);
@@ -168,7 +168,9 @@ class Character extends MovableObject {
   }
 
   killByJump(enemy) {
-    enemy.energy = 0;
+    let bigChicken = this.world.level.enemies[this.world.level.enemies.length - 1];
+    if (enemy != bigChicken)
+      enemy.energy = 0;
     // enemy.smash_sound.currentTime = 0;
     // this.world.playSoundIfSwitchedOn(enemy.smash_sound);
     this.world.deleteDeadEnemy(enemy);

@@ -38,8 +38,10 @@ class ThrowableObject extends MovableObject {
         this.loadImages(this.imagesExplosion);
         setInterval(() => {
             this.moveBottle();
-            this.playAnimation(this.imagesBottleRotation)
         }, 25);
+        setInterval(() => {
+            this.playAnimation(this.imagesBottleRotation)
+        }, 50);
         this.throw_sound.play();
         this.checkHit();
     }
@@ -62,7 +64,6 @@ class ThrowableObject extends MovableObject {
 
     bottleExplosion(enemy) {
         if (this.isColliding(enemy)) {
-
             this.playAnimation(this.imagesExplosion);
             this.break_sound.play();
             // if (this.hasBeenThrown) return;
