@@ -1,6 +1,7 @@
 function startGame() {
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('menu-bar').style.display = 'none';
+    init();
 }
 
 document.getElementById('resize').addEventListener('click', toggleFullscreen);
