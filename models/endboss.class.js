@@ -43,8 +43,17 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/5_dead/G26.png',
     ]
 
-    hadFirstContact = false;
-
+    conditions = [
+        { energyLevel: 90, xThreshold: 4300 },
+        { energyLevel: 80, xThreshold: 4100 },
+        { energyLevel: 70, xThreshold: 3900 },
+        { energyLevel: 60, xThreshold: 3700 },
+        { energyLevel: 50, xThreshold: 3500 },
+        { energyLevel: 40, xThreshold: 3300 },
+        { energyLevel: 30, xThreshold: 3100 },
+        { energyLevel: 20, xThreshold: 2900 },
+        { energyLevel: 10, xThreshold: 2700 }
+    ];
     constructor() {
         super().loadImage(this.imagesWalking[0]);
         this.loadImages(this.imagesWalking);
@@ -58,31 +67,28 @@ class Endboss extends MovableObject {
     }
 
     animate() {
-        let i = 0;
         setInterval(() => {
-            // if (i < 10) {
-            //     this.playAnimation(this.imagesWalking);
-            // } else {
-            //     this.playAnimation(this.imagesAlert);
-            // }
-
-            // i++;
-
-            // if (this.Character.x > 3000 && !this.hadFirstContact) {
-            //     i = 0;
-            //     this.hadFirstContact = true;
-            // }
-            this.playAnimation(this.imagesAlert)
-            if (this.energy <= 90) {
-                this.playAnimation(this.imagesHurt);
-                this.moveLeft();
-            }
             if (this.energy <= 0) {
                 this.playAnimation(this.imagesDead);
                 setTimeout(() => {
                     document.getElementById('game-win').style.display = "block";
                     this.clearAllIntervals();
                 }, 1000);
+                return;
+            }
+
+            this.playAnimation(this.imagesAlert);
+
+            for (const condition of this.conditions) {
+                if (this.energy === condition.energyLevel && this.x > condition.xThreshold) {
+                    this.playAnimation(this.imagesHurt);
+
+                    setTimeout(() => {
+                        this.playAnimation(this.imagesAttack);
+                        this.moveLeft();
+                    }, 1000);
+                    break;
+                }
             }
         }, 200);
     }
@@ -90,4 +96,6 @@ class Endboss extends MovableObject {
     clearAllIntervals() {
         for (let i = 1; i < 9999; i++) window.clearInterval(i);
     }
+
 }
+
