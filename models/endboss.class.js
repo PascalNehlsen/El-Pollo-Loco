@@ -66,12 +66,17 @@ class Endboss extends MovableObject {
         this.animate();
     }
 
+    win_sound = new Audio('./audio/win-sound.mp3')
+
     animate() {
         setInterval(() => {
             if (this.energy <= 0) {
                 this.playAnimation(this.imagesDead);
                 setTimeout(() => {
-                    document.getElementById('game-win').style.display = "block";
+                    document.getElementById('game-win').style.display = 'block';
+                    document.getElementById('menu-bar').style.display = 'flex';
+                    document.getElementById('restart-game').style.display = 'flex';
+                    this.win_sound.play();
                     this.clearAllIntervals();
                 }, 1000);
                 return;
@@ -95,6 +100,7 @@ class Endboss extends MovableObject {
 
     clearAllIntervals() {
         for (let i = 1; i < 9999; i++) window.clearInterval(i);
+        this.game_sound.pause();
     }
 }
 

@@ -47,6 +47,8 @@ class World {
   checkIfCharacterIsDead() {
     if (this.character.energy <= 0) {
       document.getElementById('game-over').style.display = 'block';
+      document.getElementById('menu-bar').style.display = 'flex';
+      document.getElementById('restart-game').style.display = 'flex';
       this.clearAllIntervals();
     }
   }

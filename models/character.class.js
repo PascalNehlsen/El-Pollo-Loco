@@ -80,6 +80,9 @@ class Character extends MovableObject {
   walking_sound = new Audio('./audio/footsteps.mp3');
   jump_sound = new Audio('./audio/jump.mp3')
   snore_sound = new Audio('./audio/snore.mp3')
+  game_sound = new Audio('./audio/game-music.mp3')
+  hurt_sound = new Audio('./audio/hurt.mp3')
+  gameStarted = false;
 
   constructor() {
     super().loadImage(
@@ -106,6 +109,7 @@ class Character extends MovableObject {
       this.walking_sound.pause();
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
+        this.gameStarted = true;
         this.otherDirection = false;
         if (!this.isAboveGround()) {
           this.walking_sound.play();
@@ -115,6 +119,7 @@ class Character extends MovableObject {
 
       if (this.world.keyboard.LEFT && this.x > -200) {
         this.moveLeft()
+        this.gameStarted = true;
         this.otherDirection = true;
         if (!this.isAboveGround()) {
           this.walking_sound.play();
@@ -125,6 +130,8 @@ class Character extends MovableObject {
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         this.jump()
         this.jump_sound.play();
+        this.snore_sound.pause();
+        this.gameStarted = true;
         this.jump_sound.playbackRate = 1.5;
       }
       this.world.camera_x = -this.x + 100;
@@ -132,22 +139,30 @@ class Character extends MovableObject {
 
     setInterval(() => {
       if (this.isDead()) {
+        this.game_sound.pause();
         this.playAnimation(this.imagesDead);
+        this.snore_sound.pause();
       } else if (this.isHurt() && !this.isAboveGround()) {
+        this.hurt_sound.play()
         this.playAnimation(this.imagesHurt);
+        this.gameStarted = true;
+        this.snore_sound.pause();
       } else if (this.world.keyboard.RIGHT && !this.isAboveGround() || this.world.keyboard.LEFT && !this.isAboveGround()) {
         this.playAnimation(this.imagesWalking);
+        this.gameStarted = true;
+        this.snore_sound.pause();
+        this.game_sound.volume = 0.1;
+        this.game_sound.play();
       }
     }, 60);
     setInterval(() => {
-      if (this.x < 100 && this.energy == 100) {
+      if (this.x < 100 && this.energy == 100 && !this.gameStarted) {
         this.playAnimation(this.imagesLongIdle);
-        // this.snore_sound.play();
-      } else {
-        // this.snore_sound.pause();
+        this.snore_sound.play();
       }
       if (this.isAboveGround()) {
         this.playAnimation(this.imagesJumping);
+        this.gameStarted = true;
       }
     }, 150);
   }

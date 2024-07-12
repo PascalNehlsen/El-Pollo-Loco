@@ -5,6 +5,7 @@ class MovableObject extends DrawableObject {
   otherDirection = false;
   energy = 100;
   lastHit = 0;
+  game_sound = new Audio('./audio/game-music.mp3')
 
   offset = {
     left: 10,
