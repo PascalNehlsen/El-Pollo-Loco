@@ -105,3 +105,26 @@ function resizeCanvas() {
     gameover.style.width = '100%';
     gameover.style.borderRadius = 'unset';
 }
+
+function isMobileDevice() {
+    return /Mobi|Android/i.test(navigator.userAgent);
+}
+
+function checkDeviceOrientation() {
+    if (isMobileDevice()) {
+        if (window.matchMedia("(orientation: portrait)").matches) {
+            console.log("Dies ist ein mobiles Gerät im Hochformat.");
+        } else {
+            console.log("Dies ist ein mobiles Gerät im Querformat.");
+            document.getElementById('resize').style.display = 'none';
+            document.getElementById('description-container').style.display = 'none';
+        }
+    } else {
+        console.log("Dies ist kein mobiles Gerät.");
+    }
+}
+
+checkDeviceOrientation();
+
+window.addEventListener('resize', checkDeviceOrientation);
+window.addEventListener('orientationchange', checkDeviceOrientation);

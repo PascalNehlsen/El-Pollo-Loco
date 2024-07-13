@@ -60,35 +60,45 @@
             <div>
                 <img onclick="adjustSound()" id="audio" title="Sound is loud" src="./img/icons/audio-loud.png" alt="">
                 <img id="resize" src="./img/icons/resize.png" alt="">
+                <img style="display: none;" id="mobile-info" src="./img/icons/infos.png" alt="">
             </div>
+        </div>
+
+        <div id="mobile-bindings" class="mobile-bindings" style="display: none;">
+            <div>
+                <img src="./img/icons/key-left-mobile.png" alt="">
+                <img src="./img/icons/key-right-mobile.png" alt="">
+            </div>
+            <div>
+                <img src="./img/icons/key-space-mobile.png" alt="">
+                <img src="./img/icons/key-d-mobile.png" alt="">
+            </div>
+        </div>
+
+        <div class="turn-to-play" id="turn-device" style="display: none;">
+            <svg width="200" height="400" xmlns="http://www.w3.org/2000/svg">
+                <g transform="translate(0, 30)">
+                    <rect x="50" y="100" width="100" height="200" rx="20" fill="none" stroke="#333333" />
+                    <rect x="60" y="110" width="80" height="160" rx="15" fill="none" stroke="#333333" />
+                    <circle cx="100" cy="290" r="5" fill="#333333" />
+                    <circle cx="80" cy="115" r="3" fill="#333333" />
+                    <rect x="70" y="105" width="60" height="3" fill="#333333" />
+                </g>
+                <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 0 0" to="-90 0 0"
+                    dur="1.5s" repeatCount="indefinite" />
+            </svg>
+            <span>Turn your Device to play</span>
         </div>
 
     </div>
 
-    <div class="description-container">
-        <img src="./img/icons/key-space.png" alt=""> <span>JUMP</span>
-        <img src="./img/icons/key-d.png" alt=""> <span>THROW</span>
+    <div class="description-container" id="description-container">
         <img src="./img/icons/key-left.png" alt=""> <span>MOVE LEFT</span>
         <img src="./img/icons/key-right.png" alt=""> <span>MOVE RIGHT</span>
+        <img src="./img/icons/key-space.png" alt=""> <span>JUMP</span>
+        <img src="./img/icons/key-d.png" alt=""> <span>THROW</span>
     </div>
     <script src="./js/start-screen.js"></script>
-
-    <!-- <div class="turn-to-play">
-        <svg width="200" height="400" xmlns="http://www.w3.org/2000/svg">
-            <g transform="translate(0, 30)">
-                <rect x="50" y="100" width="100" height="200" rx="20" fill="none" stroke="#333333" />
-                <rect x="60" y="110" width="80" height="160" rx="15" fill="none" stroke="#333333" />
-                <circle cx="100" cy="290" r="5" fill="#333333" />
-                <circle cx="80" cy="115" r="3" fill="#333333" />
-                <rect x="70" y="105" width="60" height="3" fill="#333333" />
-            </g>
-            <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 0 0" to="-90 0 0"
-                dur="1.5s" repeatCount="indefinite" />
-        </svg>
-        <span>Turn your Device to play</span>
-    </div> -->
-
-
 
 </body>
 
