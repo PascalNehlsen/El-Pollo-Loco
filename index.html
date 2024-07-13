@@ -30,7 +30,6 @@
     <script src="./models/throwable-object.class.js"></script>
     <script src="./levels/level1.js"></script>
     <script src="./js/game.js"></script>
-    <script src="./js/start-screen.js" defer></script>
 
 </head>
 
@@ -59,12 +58,21 @@
                     alt="">
             </div>
             <div>
-                <img id="audio" src="./img/icons/audio-loud.png" alt="">
-                <img id="infos" src="./img/icons/infos.png" alt="">
+                <img onclick="adjustSound()" id="audio" title="Sound is loud" src="./img/icons/audio-loud.png" alt="">
                 <img id="resize" src="./img/icons/resize.png" alt="">
             </div>
         </div>
+
     </div>
+
+    <div class="description-container">
+        <img src="./img/icons/key-space.png" alt=""> <span>JUMP</span>
+        <img src="./img/icons/key-d.png" alt=""> <span>THROW</span>
+        <img src="./img/icons/key-left.png" alt=""> <span>MOVE LEFT</span>
+        <img src="./img/icons/key-right.png" alt=""> <span>MOVE RIGHT</span>
+    </div>
+
+    <script src="./js/start-screen.js"></script>
 
 </body>
 

@@ -1,3 +1,6 @@
+let soundMuted = false;
+let onlyMusic = false;
+
 function startGame() {
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('game-over').style.display = 'none';
@@ -19,6 +22,35 @@ document.addEventListener('keydown', function (event) {
         document.exitFullscreen();
     }
 });
+
+let audioBtn = document.getElementById('audio');
+
+
+function adjustSound() {
+    let audioBtn = document.getElementById('audio');
+    let currentSrc = audioBtn.src;
+
+    if (currentSrc.endsWith('audio-loud.png')) {
+        audioBtn.src = './img/icons/sound-only-music.png';
+        soundMuted = true;
+        onlyMusic = true;
+        setTooltipText('Only music is playing');
+    } else if (currentSrc.endsWith('sound-only-music.png')) {
+        audioBtn.src = './img/icons/sound-mute.png';
+        soundMuted = true;
+        onlyMusic = false;
+        setTooltipText('Sound is muted');
+    } else if (currentSrc.endsWith('sound-mute.png')) {
+        audioBtn.src = './img/icons/audio-loud.png';
+        soundMuted = false;
+        onlyMusic = false;
+        setTooltipText('Sound is loud');
+    }
+}
+
+function setTooltipText(text) {
+    audioBtn.title = text;
+}
 
 function toggleFullscreen() {
     let elem = document.getElementById('canvas-container');

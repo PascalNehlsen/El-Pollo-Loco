@@ -100,7 +100,6 @@ class Character extends MovableObject {
 
   animate() {
     setInterval(() => {
-
       if (!this.isAboveGround()) {
         this.speedY = 0;
         this.y = 140;
@@ -112,8 +111,10 @@ class Character extends MovableObject {
         this.gameStarted = true;
         this.otherDirection = false;
         if (!this.isAboveGround()) {
-          this.walking_sound.play();
-          this.walking_sound.playbackRate = 3;
+          if (!soundMuted) {
+            this.walking_sound.play();
+            this.walking_sound.playbackRate = 3;
+          }
         }
       }
 
@@ -122,14 +123,18 @@ class Character extends MovableObject {
         this.gameStarted = true;
         this.otherDirection = true;
         if (!this.isAboveGround()) {
-          this.walking_sound.play();
-          this.walking_sound.playbackRate = 3;
+          if (!soundMuted) {
+            this.walking_sound.play();
+            this.walking_sound.playbackRate = 3;
+          }
         }
       }
 
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         this.jump()
-        this.jump_sound.play();
+        if (!soundMuted) {
+          this.jump_sound.play();
+        }
         this.snore_sound.pause();
         this.gameStarted = true;
         this.jump_sound.playbackRate = 1.5;
@@ -143,7 +148,9 @@ class Character extends MovableObject {
         this.playAnimation(this.imagesDead);
         this.snore_sound.pause();
       } else if (this.isHurt() && !this.isAboveGround()) {
-        this.hurt_sound.play()
+        if (!soundMuted) {
+          this.hurt_sound.play()
+        }
         this.playAnimation(this.imagesHurt);
         this.gameStarted = true;
         this.snore_sound.pause();
@@ -151,8 +158,10 @@ class Character extends MovableObject {
         this.playAnimation(this.imagesWalking);
         this.gameStarted = true;
         this.snore_sound.pause();
-        this.game_sound.volume = 0.03;
-        this.game_sound.play();
+        if (!(soundMuted && !onlyMusic) || (soundMuted && onlyMusic)) {
+          this.game_sound.volume = 0.02;
+          this.game_sound.play();
+        }
       }
       let bigChicken = this.world.level.enemies[this.world.level.enemies.length - 1];
       if (bigChicken.energy <= 0) {
@@ -162,7 +171,9 @@ class Character extends MovableObject {
     setInterval(() => {
       if (this.x < 100 && this.energy == 100 && !this.gameStarted) {
         this.playAnimation(this.imagesLongIdle);
-        this.snore_sound.play();
+        if (!soundMuted) {
+          this.snore_sound.play();
+        }
       }
       if (this.isAboveGround()) {
         this.playAnimation(this.imagesJumping);
@@ -195,7 +206,9 @@ class Character extends MovableObject {
     let bigChicken = this.world.level.enemies[this.world.level.enemies.length - 1];
     if (enemy != bigChicken)
       enemy.energy = 0;
-    this.smash_enemy.play();
+    if (!soundMuted) {
+      this.smash_enemy.play();
+    }
     this.world.deleteDeadEnemy(enemy);
     this.jump();
   }

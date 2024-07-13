@@ -77,7 +77,9 @@ class Endboss extends MovableObject {
                     document.getElementById('game-win').style.display = 'block';
                     document.getElementById('menu-bar').style.display = 'flex';
                     document.getElementById('restart-game').style.display = 'flex';
-                    this.win_sound.play();
+                    if (!soundMuted) {
+                        this.win_sound.play();
+                    }
                     this.clearAllIntervals();
                 }, 1000);
                 return;
@@ -87,7 +89,9 @@ class Endboss extends MovableObject {
 
             for (const condition of this.conditions) {
                 if (this.energy === condition.energyLevel && this.x > condition.xThreshold) {
-                    this.endboss_hit.play();
+                    if (!soundMuted) {
+                        this.endboss_hit.play();
+                    }
                     this.playAnimation(this.imagesHurt);
 
                     setTimeout(() => {

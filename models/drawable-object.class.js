@@ -12,7 +12,9 @@ class DrawableObject {
     }
 
     playStatusbarFullSound() {
-        this.statusbar_full_sound.play();
+        if (!soundMuted) {
+            this.statusbar_full_sound.play();
+        }
     }
 
     loadImage(path) {
