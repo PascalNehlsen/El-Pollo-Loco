@@ -80,8 +80,8 @@ class Character extends MovableObject {
   walking_sound = new Audio('./audio/footsteps.mp3');
   jump_sound = new Audio('./audio/jump.mp3')
   snore_sound = new Audio('./audio/snore.mp3')
-  game_sound = new Audio('./audio/game-music.mp3')
   hurt_sound = new Audio('./audio/hurt.mp3')
+  smash_enemy = new Audio('./audio/smash-baby-chicken.mp3')
   gameStarted = false;
 
   constructor() {
@@ -151,8 +151,12 @@ class Character extends MovableObject {
         this.playAnimation(this.imagesWalking);
         this.gameStarted = true;
         this.snore_sound.pause();
-        this.game_sound.volume = 0.1;
+        this.game_sound.volume = 0.03;
         this.game_sound.play();
+      }
+      let bigChicken = this.world.level.enemies[this.world.level.enemies.length - 1];
+      if (bigChicken.energy <= 0) {
+        this.game_sound.pause();
       }
     }, 60);
     setInterval(() => {
@@ -191,8 +195,7 @@ class Character extends MovableObject {
     let bigChicken = this.world.level.enemies[this.world.level.enemies.length - 1];
     if (enemy != bigChicken)
       enemy.energy = 0;
-    // enemy.smash_sound.currentTime = 0;
-    // this.world.playSoundIfSwitchedOn(enemy.smash_sound);
+    this.smash_enemy.play();
     this.world.deleteDeadEnemy(enemy);
     this.jump();
   }

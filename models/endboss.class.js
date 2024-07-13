@@ -67,6 +67,7 @@ class Endboss extends MovableObject {
     }
 
     win_sound = new Audio('./audio/win-sound.mp3')
+    endboss_hit = new Audio('./audio/endboss-hit.mp3')
 
     animate() {
         setInterval(() => {
@@ -86,6 +87,7 @@ class Endboss extends MovableObject {
 
             for (const condition of this.conditions) {
                 if (this.energy === condition.energyLevel && this.x > condition.xThreshold) {
+                    this.endboss_hit.play();
                     this.playAnimation(this.imagesHurt);
 
                     setTimeout(() => {
