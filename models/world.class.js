@@ -13,6 +13,7 @@ class World {
   collectedCoins = [];
   collectedBottles = [];
   collect_coin_sound = new Audio('./audio/collect-coin.mp3');
+  loose_sound = new Audio('./audio/loose-sound.mp3')
   firstContact = false;
 
   constructor(canvas, keyboard) {
