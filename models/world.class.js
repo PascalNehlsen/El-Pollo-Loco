@@ -129,6 +129,7 @@ class World {
       document.getElementById('game-over').style.display = 'block';
       document.getElementById('menu-bar').style.display = 'flex';
       document.getElementById('restart-game').style.display = 'flex';
+      document.getElementById('legal').style.display = '';
       this.clearAllIntervals();
     }
   }

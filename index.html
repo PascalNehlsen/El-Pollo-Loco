@@ -56,11 +56,10 @@
             <div>
                 <img style="display: none;" id="restart-game" onclick="startGame()" src="./img/icons/restart.png"
                     alt="">
-            </div>
-            <div>
                 <img onclick="adjustSound()" id="audio" title="Sound is loud" src="./img/icons/audio-loud.png" alt="">
                 <img id="resize" src="./img/icons/resize.png" alt="">
-                <img style="display: none;" id="mobile-info" src="./img/icons/infos.png" alt="">
+                <img onclick="mobileInformation()" style="display: none;" id="mobile-info" src="./img/icons/infos.png"
+                    alt="">
             </div>
         </div>
 
@@ -72,6 +71,20 @@
             <div>
                 <img id="move-jump" src="./img/icons/key-space-mobile.png" alt="">
                 <img id="move-throw" src="./img/icons/key-d-mobile.png" alt="">
+            </div>
+        </div>
+
+        <div class="mobile-description-container" id="mobile-description-container" style="display: none;">
+            <div>
+                <img src="./img/icons/key-left-mobile.png" alt=""> <span>MOVE LEFT</span>
+                <img src="./img/icons/key-right-mobile.png" alt=""> <span>MOVE RIGHT</span>
+                <img src="./img/icons/key-space-mobile.png" alt=""> <span>JUMP</span>
+                <img src="./img/icons/key-d-mobile.png" alt=""> <span>THROW</span>
+            </div>
+            <div>
+                <img src="./img/icons/audio-loud.png" alt=""> <span>SOUND LOUD</span>
+                <img src="./img/icons/sound-only-music.png" alt=""> <span>ONLY MUSIC</span>
+                <img src="./img/icons/sound-mute.png" alt=""> <span>SOUND MUTE</span>
             </div>
         </div>
 

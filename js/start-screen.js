@@ -22,6 +22,8 @@ function startGame() {
     document.getElementById('game-over').style.display = 'none';
     document.getElementById('game-win').style.display = 'none';
     document.getElementById('menu-bar').style.display = 'none';
+    document.getElementById('mobile-description-container').style.display = 'none';
+    document.getElementById('legal').style.display = 'none';
     init();
 }
 
@@ -242,19 +244,23 @@ function setNoMobileDevice() {
     document.getElementById('resize').style.display = 'flex';
     document.getElementById('play-btn-img').style.opacity = '';
     document.getElementById('legal').style.display = '';
+    document.getElementById('legal').style.position = '';
+    document.getElementById('legal').style.bottom = '';
 }
 
 /**
  * Sets UI for when the device is in landscape orientation.
  */
 function setMobileDeviceWidth() {
-    document.getElementById('resize').style.display = 'none';
+    document.getElementById('menu-bar').style.display = '';
     document.getElementById('description-container').style.display = 'none';
     document.getElementById('mobile-bindings').style.display = 'flex';
     document.getElementById('mobile-info').style.display = 'flex';
     document.getElementById('turn-device').style.display = 'none';
     document.getElementById('play-btn-img').style.opacity = '0.8';
-    document.getElementById('legal').style.display = 'none';
+    document.getElementById('legal').style.position = 'absolute';
+    document.getElementById('legal').style.bottom = '5px';
+    document.getElementById('legal').style.display = '';
 }
 
 /**
@@ -269,7 +275,11 @@ function setMobileDeviceHeight() {
     document.getElementById('turn-device').style.top = '0';
     document.getElementById('turn-device').style.bottom = '0';
     document.getElementById('play-btn-img').style.opacity = '';
+    document.getElementById('legal').style.position = '';
+    document.getElementById('legal').style.bottom = '';
+    document.getElementById('legal').style.display = '';
 }
+
 
 // Initial device orientation check
 checkDeviceOrientation();
@@ -302,4 +312,15 @@ function togglePrivacyPolicy() {
         privacyPolicy.style.display = 'block';
         legalNotice.style.display = 'none';
     }
+}
+
+function mobileInformation() {
+    let mobileInfo = document.getElementById('mobile-description-container');
+    if (mobileInfo.style.display === 'none') {
+        mobileInfo.style.display = '';
+    } else {
+        mobileInfo.style.display = 'none';
+    }
+    mobileInfo.style.position = 'absolute';
+    mobileInfo.style.top = '0';
 }

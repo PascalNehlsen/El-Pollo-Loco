@@ -58,8 +58,9 @@ canvas {
   top: 10px;
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: flex-end;
   z-index: 999;
+  padding-right: 30px;
 }
 
 .mobile-bindings {
@@ -97,7 +98,6 @@ canvas {
 .menu-bar div {
   display: flex;
   gap: 20px;
-  padding-right: 30px;
 }
 
 .menu-bar div:first-of-type {
@@ -133,6 +133,26 @@ canvas {
   width: 100%;
   height: 100%;
   border-radius: 10px;
+}
+
+.mobile-description-container {
+  position: absolute;
+  font-size: 24px;
+  left: 10px;
+  display: flex;
+  margin-top: 5px;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobile-description-container div {
+  display: flex;
+  align-items: center;
+}
+
+.mobile-description-container span {
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .description-container {
@@ -378,6 +398,12 @@ canvas {
     border-radius: 0;
   }
 
+  .legal-notice {
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+  }
+
   .overlay-screen img {
     border-radius: 0;
   }
@@ -396,5 +422,22 @@ canvas {
 
   h1 {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 740px) {
+  .mobile-description-container {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 667px) {
+  .menu-bar img {
+    height: 40px;
+  }
+
+  .menu-bar div {
+    gap: 10px;
+    padding-right: 20px;
   }
 }
