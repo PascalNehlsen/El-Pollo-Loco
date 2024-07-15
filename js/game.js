@@ -1,7 +1,28 @@
+/**
+ * Main file for game initialization and event handling.
+ */
+
+/**
+ * The canvas element where the game is rendered.
+ * @type {HTMLCanvasElement}
+ */
 let canvas;
+
+/**
+ * The instance of the game world.
+ * @type {World}
+ */
 let world;
+
+/**
+ * Keyboard input control for the game.
+ * @type {Keyboard}
+ */
 let keyboard = new Keyboard();
 
+/**
+ * Initializes the game and necessary resources.
+ */
 function init() {
   initlevel();
   canvas = document.getElementById('canvas');
@@ -9,48 +30,63 @@ function init() {
   mobileEvents();
 }
 
+/**
+ * Event handler for keyboard key down events.
+ * @param {KeyboardEvent} event - The triggered keyboard event.
+ */
 window.addEventListener('keydown', (event) => {
-  if (event.key == 'ArrowRight') {
-    keyboard.RIGHT = true;
-  }
-  if (event.key == 'ArrowLeft') {
-    keyboard.LEFT = true;
-  }
-  if (event.key == 'ArrowUp') {
-    keyboard.UP = true;
-  }
-  if (event.key == 'ArrowDown') {
-    keyboard.DOWN = true;
-  }
-  if (event.key == ' ') {
-    keyboard.SPACE = true;
-  }
-  if (event.key == 'd') {
-    keyboard.D = true;
+  switch (event.key) {
+    case 'ArrowRight':
+      keyboard.RIGHT = true;
+      break;
+    case 'ArrowLeft':
+      keyboard.LEFT = true;
+      break;
+    case 'ArrowUp':
+      keyboard.UP = true;
+      break;
+    case 'ArrowDown':
+      keyboard.DOWN = true;
+      break;
+    case ' ':
+      keyboard.SPACE = true;
+      break;
+    case 'd':
+      keyboard.D = true;
+      break;
   }
 });
 
+/**
+ * Event handler for keyboard key up events.
+ * @param {KeyboardEvent} event - The triggered keyboard event.
+ */
 window.addEventListener('keyup', (event) => {
-  if (event.key == 'ArrowRight') {
-    keyboard.RIGHT = false;
-  }
-  if (event.key == 'ArrowLeft') {
-    keyboard.LEFT = false;
-  }
-  if (event.key == 'ArrowUp') {
-    keyboard.UP = false;
-  }
-  if (event.key == 'ArrowDown') {
-    keyboard.DOWN = false;
-  }
-  if (event.key == ' ') {
-    keyboard.SPACE = false;
-  }
-  if (event.key == 'd') {
-    keyboard.D = false;
+  switch (event.key) {
+    case 'ArrowRight':
+      keyboard.RIGHT = false;
+      break;
+    case 'ArrowLeft':
+      keyboard.LEFT = false;
+      break;
+    case 'ArrowUp':
+      keyboard.UP = false;
+      break;
+    case 'ArrowDown':
+      keyboard.DOWN = false;
+      break;
+    case ' ':
+      keyboard.SPACE = false;
+      break;
+    case 'd':
+      keyboard.D = false;
+      break;
   }
 });
 
+/**
+ * Registers touch events for mobile control.
+ */
 function mobileEvents() {
   document.getElementById('move-left').addEventListener('touchstart', (e) => {
     e.preventDefault();

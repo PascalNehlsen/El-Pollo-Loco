@@ -1,17 +1,48 @@
+/**
+ * Represents a chicken object in the game, extending the MovableObject class.
+ * @extends MovableObject
+ */
 class Chicken extends MovableObject {
+  /**
+   * Width of the chicken object.
+   * @type {number}
+   */
   width = 50;
+
+  /**
+   * Height of the chicken object.
+   * @type {number}
+   */
   height = 50;
+
+  /**
+   * Initial vertical position of the chicken object.
+   * @type {number}
+   */
   y = 380;
+
+  /**
+   * Array of paths to images used when the chicken is walking.
+   * @type {string[]}
+   */
   imagesWalking = [
     './img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
     './img/3_enemies_chicken/chicken_normal/1_walk/2_w.png',
     './img/3_enemies_chicken/chicken_normal/1_walk/3_w.png'
-  ]
+  ];
 
+  /**
+   * Array of paths to images used when the chicken is dead.
+   * @type {string[]}
+   */
   imagesDead = [
     './img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
-  ]
+  ];
 
+  /**
+   * Offset values for the collision box of the chicken.
+   * @type {{left: number, top: number, right: number, bottom: number}}
+   */
   offset = {
     left: 0,
     top: 2,
@@ -19,6 +50,9 @@ class Chicken extends MovableObject {
     bottom: 5
   };
 
+  /**
+   * Constructs a new instance of Chicken.
+   */
   constructor() {
     super().loadImage(
       './img/3_enemies_chicken/chicken_normal/1_walk/1_w.png'
@@ -31,14 +65,20 @@ class Chicken extends MovableObject {
     this.animate();
   }
 
+  /**
+   * Initiates animations for the chicken.
+   */
   animate() {
-    this.moveChicken()
+    this.moveChicken();
     this.playChickenAnimations();
   }
 
+  /**
+   * Plays walking or dead animations based on chicken's energy level.
+   */
   playChickenAnimations() {
     setInterval(() => {
-      if (this.energy == 0) {
+      if (this.energy === 0) {
         this.playAnimation(this.imagesDead);
       } else {
         this.playAnimation(this.imagesWalking);
@@ -46,7 +86,9 @@ class Chicken extends MovableObject {
     }, 200);
   }
 
-
+  /**
+   * Moves the chicken left periodically.
+   */
   moveChicken() {
     setInterval(() => {
       if (this.isDead()) return;

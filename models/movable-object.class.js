@@ -105,8 +105,8 @@ class MovableObject extends DrawableObject {
   /**
    * Decreases the object's energy when it gets hit.
    */
-  hit() {
-    this.energy -= 1;
+  hit(hitAmount) {
+    this.energy -= hitAmount;
     if (this.energy < 0) {
       this.energy = 0;
       this.game_sound.pause();
@@ -126,7 +126,7 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * Checks if the object is dead (energy is zero).
+   * Checks if the object is dead (energy is zero). 
    * @returns {boolean} True if the object's energy is zero, otherwise false.
    */
   isDead() {

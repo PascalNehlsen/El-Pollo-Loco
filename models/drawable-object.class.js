@@ -60,7 +60,7 @@ class DrawableObject {
 
     /**
      * Loads multiple images from the given array of paths.
-     * @param {string[]} arr - An array of image paths.
+     * @param {string[]} arr - An array of image paths. 
      */
     loadImages(arr) {
         arr.forEach((path) => {

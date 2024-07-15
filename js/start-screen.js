@@ -1,6 +1,22 @@
+/**
+ * Main file for game initialization and event handling.
+ */
+
+/**
+ * Indicates whether sound is muted.
+ * @type {boolean}
+ */
 let soundMuted = false;
+
+/**
+ * Indicates whether only music is playing.
+ * @type {boolean}
+ */
 let onlyMusic = false;
 
+/**
+ * Starts the game by hiding start and end screens and initializing the game.
+ */
 function startGame() {
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('game-over').style.display = 'none';
@@ -9,25 +25,35 @@ function startGame() {
     init();
 }
 
+/**
+ * Event listener for the fullscreen toggle button.
+ */
 document.getElementById('resize').addEventListener('click', toggleFullscreen);
 
+/**
+ * Event listener for the fullscreen change event.
+ */
 document.addEventListener('fullscreenchange', function () {
     if (!document.fullscreenElement) {
         exitFullscreen();
     }
 });
 
+/**
+ * Event listener for the Escape key to exit fullscreen.
+ * @param {KeyboardEvent} event - The keyboard event object.
+ */
 document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape' && document.fullscreenElement) {
         document.exitFullscreen();
     }
 });
 
+/**
+ * Adjusts the sound settings (mute, only music, loud) based on current state.
+ */
 let audioBtn = document.getElementById('audio');
-
-
 function adjustSound() {
-    let audioBtn = document.getElementById('audio');
     let currentSrc = audioBtn.src;
 
     if (currentSrc.endsWith('audio-loud.png')) {
@@ -48,10 +74,17 @@ function adjustSound() {
     }
 }
 
+/**
+ * Sets the tooltip text for the audio button.
+ * @param {string} text - The tooltip text to set.
+ */
 function setTooltipText(text) {
     audioBtn.title = text;
 }
 
+/**
+ * Toggles fullscreen mode for the game.
+ */
 function toggleFullscreen() {
     let elem = document.getElementById('canvas-container');
     if (!document.fullscreenElement) {
@@ -61,6 +94,10 @@ function toggleFullscreen() {
     }
 }
 
+/**
+ * Opens fullscreen mode for a specific element.
+ * @param {HTMLElement} elem - The element to open fullscreen for.
+ */
 function openFullscreen(elem) {
     if (elem.requestFullscreen) {
         elem.requestFullscreen();
@@ -72,95 +109,180 @@ function openFullscreen(elem) {
     resizeCanvas();
 }
 
+/**
+ * Exits fullscreen mode and resets screen elements.
+ */
 function exitFullscreen() {
-    let canvas = document.getElementById('canvas');
-    canvas.style.height = '';
-    canvas.style.width = '';
-    canvas.style.borderRadius = '';
+    setCanvas();
+    setStartscreen();
+    setGameoverScreen();
+    setWinScreen();
+}
 
-    let startscreen = document.getElementById('start-screen');
-    startscreen.style.height = '';
-    startscreen.style.width = '';
-    startscreen.style.borderRadius = '';
-
-    let gameover = document.getElementById('game-over');
-    gameover.style.height = '';
-    gameover.style.width = '';
-    gameover.style.borderRadius = '';
-
+/**
+ * Sets styles for the win screen when in fullscreen.
+ */
+function setWinScreen() {
     let win = document.getElementById('game-win');
     win.style.height = '';
     win.style.width = '';
     win.style.borderRadius = '';
 }
 
-function resizeCanvas() {
-    let canvas = document.getElementById('canvas');
-    canvas.style.height = '100%';
-    canvas.style.width = '100%';
-    canvas.style.borderRadius = 'unset';
-
-    let startscreen = document.getElementById('start-screen');
-    startscreen.style.height = '100%';
-    startscreen.style.width = '100%';
-    startscreen.style.borderRadius = 'unset';
-
+/**
+ * Sets styles for the game over screen when in fullscreen.
+ */
+function setGameoverScreen() {
     let gameover = document.getElementById('game-over');
-    gameover.style.height = '100%';
-    gameover.style.width = '100%';
-    gameover.style.borderRadius = 'unset';
+    gameover.style.height = '';
+    gameover.style.width = '';
+    gameover.style.borderRadius = '';
+}
 
+/**
+ * Sets styles for the start screen when in fullscreen.
+ */
+function setStartscreen() {
+    let startscreen = document.getElementById('start-screen');
+    startscreen.style.height = '';
+    startscreen.style.width = '';
+    startscreen.style.borderRadius = '';
+}
+
+/**
+ * Sets styles for the game canvas when in fullscreen.
+ */
+function setCanvas() {
+    let canvas = document.getElementById('canvas');
+    canvas.style.height = '';
+    canvas.style.width = '';
+    canvas.style.borderRadius = '';
+}
+
+/**
+ * Resizes the game canvas to fullscreen dimensions.
+ */
+function resizeCanvas() {
+    fullCanvas();
+    fullStartscreen();
+    fullGameoverscreen();
+    fullWinscreen();
+}
+
+/**
+ * Sets fullscreen styles for the win screen.
+ */
+function fullWinscreen() {
     let win = document.getElementById('game-win');
     win.style.height = '100%';
     win.style.width = '100%';
     win.style.borderRadius = 'unset';
 }
 
+/**
+ * Sets fullscreen styles for the game over screen.
+ */
+function fullGameoverscreen() {
+    let gameover = document.getElementById('game-over');
+    gameover.style.height = '100%';
+    gameover.style.width = '100%';
+    gameover.style.borderRadius = 'unset';
+}
+
+/**
+ * Sets fullscreen styles for the start screen.
+ */
+function fullStartscreen() {
+    let startscreen = document.getElementById('start-screen');
+    startscreen.style.height = '100%';
+    startscreen.style.width = '100%';
+    startscreen.style.borderRadius = 'unset';
+}
+
+/**
+ * Sets fullscreen styles for the game canvas.
+ */
+function fullCanvas() {
+    let canvas = document.getElementById('canvas');
+    canvas.style.height = '100%';
+    canvas.style.width = '100%';
+    canvas.style.borderRadius = 'unset';
+}
+
+/**
+ * Checks if the current device is a mobile device.
+ * @returns {boolean} True if the device is a mobile device, false otherwise.
+ */
 function isMobileDevice() {
     return /Mobi|Android/i.test(navigator.userAgent);
 }
 
+/**
+ * Checks the orientation of the device and adjusts UI accordingly.
+ */
 function checkDeviceOrientation() {
     if (isMobileDevice()) {
         if (window.matchMedia("(orientation: portrait)").matches) {
-            console.log("Dies ist ein mobiles Gerät im Hochformat.");
-            document.getElementById('menu-bar').style.display = 'none';
-            document.getElementById('turn-device').style.display = 'flex';
-            document.getElementById('turn-device').style.position = 'absolute';
-            document.getElementById('turn-device').style.left = '0';
-            document.getElementById('turn-device').style.right = '0';
-            document.getElementById('turn-device').style.top = '0';
-            document.getElementById('turn-device').style.bottom = '0';
-            document.getElementById('play-btn-img').style.opacity = ''
-
-
+            setMobileDeviceHeight();
         } else {
-            console.log("Dies ist ein mobiles Gerät im Querformat.");
-            document.getElementById('resize').style.display = 'none';
-            document.getElementById('description-container').style.display = 'none';
-            document.getElementById('mobile-bindings').style.display = 'flex';
-            document.getElementById('mobile-info').style.display = 'flex';
-            document.getElementById('turn-device').style.display = 'none';
-            document.getElementById('play-btn-img').style.opacity = '0.8'
+            setMobileDeviceWidth();
         }
     } else {
-        console.log("Dies ist kein mobiles Gerät.");
-        document.getElementById('mobile-bindings').style.display = 'none';
-        document.getElementById('mobile-info').style.display = 'none';
-        document.getElementById('description-container').style.display = 'flex';
-        document.getElementById('resize').style.display = 'flex';
-        document.getElementById('play-btn-img').style.opacity = ''
+        setNoMobileDevice();
     }
 }
 
+/**
+ * Sets UI for when the device is not a mobile device.
+ */
+function setNoMobileDevice() {
+    document.getElementById('mobile-bindings').style.display = 'none';
+    document.getElementById('mobile-info').style.display = 'none';
+    document.getElementById('description-container').style.display = 'flex';
+    document.getElementById('resize').style.display = 'flex';
+    document.getElementById('play-btn-img').style.opacity = '';
+    document.getElementById('legal').style.display = '';
+}
+
+/**
+ * Sets UI for when the device is in landscape orientation.
+ */
+function setMobileDeviceWidth() {
+    document.getElementById('resize').style.display = 'none';
+    document.getElementById('description-container').style.display = 'none';
+    document.getElementById('mobile-bindings').style.display = 'flex';
+    document.getElementById('mobile-info').style.display = 'flex';
+    document.getElementById('turn-device').style.display = 'none';
+    document.getElementById('play-btn-img').style.opacity = '0.8';
+    document.getElementById('legal').style.display = 'none';
+}
+
+/**
+ * Sets UI for when the device is in portrait orientation.
+ */
+function setMobileDeviceHeight() {
+    document.getElementById('menu-bar').style.display = 'none';
+    document.getElementById('turn-device').style.display = 'flex';
+    document.getElementById('turn-device').style.position = 'absolute';
+    document.getElementById('turn-device').style.left = '0';
+    document.getElementById('turn-device').style.right = '0';
+    document.getElementById('turn-device').style.top = '0';
+    document.getElementById('turn-device').style.bottom = '0';
+    document.getElementById('play-btn-img').style.opacity = '';
+}
+
+// Initial device orientation check
 checkDeviceOrientation();
 
+// Event listeners for device orientation changes
 window.addEventListener('resize', checkDeviceOrientation);
 window.addEventListener('orientationchange', checkDeviceOrientation);
 
-let privacyPolicy = document.getElementById('privacy-policy')
-let legalNotice = document.getElementById('legal-notice')
-
+/**
+ * Toggle display of legal notice section.
+ */
+let privacyPolicy = document.getElementById('privacy-policy');
+let legalNotice = document.getElementById('legal-notice');
 function toggleLegalNotice() {
     if (legalNotice.style.display === 'block') {
         legalNotice.style.display = 'none';
@@ -170,6 +292,9 @@ function toggleLegalNotice() {
     }
 }
 
+/**
+ * Toggle display of privacy policy section.
+ */
 function togglePrivacyPolicy() {
     if (privacyPolicy.style.display === 'block') {
         privacyPolicy.style.display = 'none';
