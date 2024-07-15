@@ -201,6 +201,91 @@ canvas {
   margin-top: -50px;
 }
 
+.legal {
+  display: flex;
+  gap: 30px;
+  padding-top: 100px;
+}
+
+.legal a {
+  text-decoration: none;
+  font-size: 24px;
+  color: rgb(37, 36, 36);
+  cursor: pointer;
+}
+
+.legal-notice {
+  position: absolute;
+  display: flex;
+  background-color: #aeca54;
+  height: 480px;
+  width: 100%;
+  border-radius: 10px;
+  z-index: 999;
+}
+
+.legal-notice a {
+  text-decoration: none;
+  font-size: 24px;
+  color: rgb(37, 36, 36);
+  cursor: pointer;
+}
+
+.legal-notice a:hover {
+  color: rgb(0, 0, 0);
+}
+
+.legal-notice h2 {
+  margin-bottom: 50px;
+  letter-spacing: 5px;
+  text-shadow: 4px 4px 2px rgb(201, 131, 69);
+  color: rgb(37, 36, 36);
+  font-size: 32px;
+}
+
+.legal-notice p {
+  margin: 0;
+}
+
+.legal-notice img {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+}
+
+#privacy-policy {
+  overflow: scroll;
+  overflow-x: unset;
+}
+
+#privacy-policy p {
+  font-size: 24px;
+}
+
+.legal-notice p {
+  font-size: 32px;
+}
+
+#privacy-policy::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 10px;
+}
+
+#privacy-policy::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+#privacy-policy::-webkit-scrollbar-thumb {
+  background: #c98345;
+  border-radius: 10px;
+}
+
+#privacy-policy::-webkit-scrollbar-thumb:hover {
+  background: #b3743d;
+}
+
 @media only screen and (max-width: 760px) {
   .canvas-container {
     width: 100%;
@@ -244,6 +329,10 @@ canvas {
 
   .description-container img {
     width: 40px;
+  }
+
+  .legal-notice {
+    height: 300px;
   }
 
   #canvas {

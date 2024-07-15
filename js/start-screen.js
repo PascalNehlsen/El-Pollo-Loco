@@ -157,3 +157,24 @@ checkDeviceOrientation();
 
 window.addEventListener('resize', checkDeviceOrientation);
 window.addEventListener('orientationchange', checkDeviceOrientation);
+
+let privacyPolicy = document.getElementById('privacy-policy')
+let legalNotice = document.getElementById('legal-notice')
+
+function toggleLegalNotice() {
+    if (legalNotice.style.display === 'block') {
+        legalNotice.style.display = 'none';
+    } else {
+        legalNotice.style.display = 'block';
+        privacyPolicy.style.display = 'none';
+    }
+}
+
+function togglePrivacyPolicy() {
+    if (privacyPolicy.style.display === 'block') {
+        privacyPolicy.style.display = 'none';
+    } else {
+        privacyPolicy.style.display = 'block';
+        legalNotice.style.display = 'none';
+    }
+}
