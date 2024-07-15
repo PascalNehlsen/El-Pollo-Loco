@@ -119,7 +119,7 @@ class Character extends MovableObject {
       }
 
       if (this.world.keyboard.LEFT && this.x > -200) {
-        this.moveLeft()
+        this.moveLeft();
         this.gameStarted = true;
         this.otherDirection = true;
         if (!this.isAboveGround()) {
