@@ -6,6 +6,7 @@ function init() {
   initlevel();
   canvas = document.getElementById('canvas');
   world = new World(canvas, keyboard);
+  mobileEvents();
 }
 
 window.addEventListener('keydown', (event) => {
@@ -49,3 +50,45 @@ window.addEventListener('keyup', (event) => {
     keyboard.D = false;
   }
 });
+
+function mobileEvents() {
+  document.getElementById('move-left').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    keyboard.LEFT = true;
+  });
+
+  document.getElementById('move-left').addEventListener('touchend', (e) => {
+    e.preventDefault();
+    keyboard.LEFT = false;
+  });
+
+  document.getElementById('move-right').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    keyboard.RIGHT = true;
+  });
+
+  document.getElementById('move-right').addEventListener('touchend', (e) => {
+    e.preventDefault();
+    keyboard.RIGHT = false;
+  });
+
+  document.getElementById('move-jump').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    keyboard.SPACE = true;
+  });
+
+  document.getElementById('move-jump').addEventListener('touchend', (e) => {
+    e.preventDefault();
+    keyboard.SPACE = false;
+  });
+
+  document.getElementById('move-throw').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    keyboard.D = true;
+  });
+
+  document.getElementById('move-throw').addEventListener('touchend', (e) => {
+    e.preventDefault();
+    keyboard.D = false;
+  });
+}
