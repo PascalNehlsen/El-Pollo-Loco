@@ -191,7 +191,6 @@ class Character extends MovableObject {
     if (enemy == bigChicken) {
       if (!this.hasBeenHit) {
         enemy.hit();
-        console.log(enemy.energy);
         this.hasBeenHit = true;
         this.world.updateEndbossStatusbar(enemy.energy);
       }

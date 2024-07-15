@@ -84,9 +84,9 @@ canvas {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   font-size: 50px;
   background-image: url(./img/5_background/layers/air.png);
-  border-radius: 10px;
 }
 
 .mobile-bindings div:first-of-type {
@@ -141,12 +141,17 @@ canvas {
   margin-top: 20px;
   gap: 10px;
   background-color: #aeca54;
-  /* background: url(./img/5_background/layers/air.png);
-  background-position: center; */
   box-shadow: 0px 0px 6px 6px rgb(201, 131, 69);
   padding: 5px;
   border-radius: 10px;
   overflow: hidden;
+  justify-content: center;
+}
+
+.description-container div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .description-container span {
@@ -197,8 +202,34 @@ canvas {
 }
 
 @media only screen and (max-width: 760px) {
-  canvas {
+  .canvas-container {
     width: 100%;
+  }
+
+  #canvas {
+    width: 100%;
+    height: 480px;
+  }
+
+  #start-screen {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  #game-win {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  #game-over {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .description-container {
+    margin-top: 30px;
+    width: fit-content;
+    flex-direction: column;
   }
 
   h1 {
@@ -206,13 +237,72 @@ canvas {
   }
 }
 
-@media only screen and (max-height: 480px) {
-  canvas {
-    height: 100vh;
+@media only screen and (max-width: 420px) {
+  .description-container span {
+    font-size: 24px;
   }
 
+  .description-container img {
+    width: 40px;
+  }
+
+  #canvas {
+    height: 300px;
+  }
+
+  #start-screen {
+    height: 300px;
+  }
+
+  #game-win {
+    height: 300px;
+  }
+
+  #game-over {
+    height: 300px;
+  }
+
+  #menu-bar {
+    top: 100px;
+  }
+
+  .description-container {
+    margin-top: 0;
+  }
+}
+
+@media only screen and (max-height: 480px) {
   .canvas-container {
+    height: 100vh;
+    width: 100%;
+  }
+
+  #canvas {
     height: 100%;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  #start-screen {
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .overlay-screen img {
+    border-radius: 0;
+  }
+
+  #game-win {
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  #game-over {
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
   }
 
   h1 {

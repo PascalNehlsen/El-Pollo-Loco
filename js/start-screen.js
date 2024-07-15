@@ -64,9 +64,9 @@ function toggleFullscreen() {
 function openFullscreen(elem) {
     if (elem.requestFullscreen) {
         elem.requestFullscreen();
-    } else if (elem.webkitRequestFullscreen) { /* Safari */
+    } else if (elem.webkitRequestFullscreen) {
         elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { /* IE11 */
+    } else if (elem.msRequestFullscreen) {
         elem.msRequestFullscreen();
     }
     resizeCanvas();
@@ -87,6 +87,11 @@ function exitFullscreen() {
     gameover.style.height = '';
     gameover.style.width = '';
     gameover.style.borderRadius = '';
+
+    let win = document.getElementById('game-win');
+    win.style.height = '';
+    win.style.width = '';
+    win.style.borderRadius = '';
 }
 
 function resizeCanvas() {
@@ -104,6 +109,11 @@ function resizeCanvas() {
     gameover.style.height = '100%';
     gameover.style.width = '100%';
     gameover.style.borderRadius = 'unset';
+
+    let win = document.getElementById('game-win');
+    win.style.height = '100%';
+    win.style.width = '100%';
+    win.style.borderRadius = 'unset';
 }
 
 function isMobileDevice() {
@@ -114,14 +124,24 @@ function checkDeviceOrientation() {
     if (isMobileDevice()) {
         if (window.matchMedia("(orientation: portrait)").matches) {
             console.log("Dies ist ein mobiles Gerät im Hochformat.");
-            document.getElementById('mobile-bindings').style.display = 'none';
-            document.getElementById('mobile-info').style.display = 'none';
+            document.getElementById('menu-bar').style.display = 'none';
+            document.getElementById('turn-device').style.display = 'flex';
+            document.getElementById('turn-device').style.position = 'absolute';
+            document.getElementById('turn-device').style.left = '0';
+            document.getElementById('turn-device').style.right = '0';
+            document.getElementById('turn-device').style.top = '0';
+            document.getElementById('turn-device').style.bottom = '0';
+            document.getElementById('play-btn-img').style.opacity = ''
+
+
         } else {
             console.log("Dies ist ein mobiles Gerät im Querformat.");
             document.getElementById('resize').style.display = 'none';
             document.getElementById('description-container').style.display = 'none';
             document.getElementById('mobile-bindings').style.display = 'flex';
             document.getElementById('mobile-info').style.display = 'flex';
+            document.getElementById('turn-device').style.display = 'none';
+            document.getElementById('play-btn-img').style.opacity = '0.8'
         }
     } else {
         console.log("Dies ist kein mobiles Gerät.");
@@ -129,6 +149,7 @@ function checkDeviceOrientation() {
         document.getElementById('mobile-info').style.display = 'none';
         document.getElementById('description-container').style.display = 'flex';
         document.getElementById('resize').style.display = 'flex';
+        document.getElementById('play-btn-img').style.opacity = ''
     }
 }
 
