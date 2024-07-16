@@ -66,6 +66,7 @@ function adjustSound() {
         audioBtn.src = './img/icons/sound-mute.png';
         soundMuted = true;
         onlyMusic = false;
+        game_sound.pause();
         setTooltipText('Sound is muted');
     } else if (currentSrc.endsWith('sound-mute.png')) {
         audioBtn.src = './img/icons/audio-loud.png';
