@@ -67,15 +67,6 @@ class World {
    */
   collectedBottles = [];
 
-  /**
-   * @type {HTMLAudioElement} - Audio played when collecting coins.
-   */
-  collect_coin_sound = new Audio('./audio/collect-coin.mp3');
-
-  /**
-   * @type {HTMLAudioElement} - Audio played when the character loses.
-   */
-  loose_sound = new Audio('./audio/loose-sound.mp3');
 
   /**
    * @type {boolean} - Indicates if the character has encountered the end boss for the first time.
@@ -181,7 +172,7 @@ class World {
     this.level.bottles.forEach((bottle, i) => {
       if (this.character.isColliding(bottle)) {
         if (!soundMuted) {
-          this.collect_coin_sound.play();
+          collect_coin_sound.play();
         }
         this.level.bottles.splice(i, 1);
         this.collectedBottles.push(bottle);
@@ -292,7 +283,7 @@ class World {
     this.level.coins.forEach((coin, i) => {
       if (this.character.isColliding(coin)) {
         if (!soundMuted) {
-          this.collect_coin_sound.play();
+          collect_coin_sound.play();
         }
         this.level.coins.splice(i, 1);
         this.collectedCoins.push(coin);

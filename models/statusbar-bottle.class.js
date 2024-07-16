@@ -50,17 +50,17 @@ class StatusBarBottle extends DrawableObject {
      */
     countBottles() {
         if (this.bottleAmount == 10) {
-            this.playStatusbarFullSound(); // Play sound if status bar is full
+            this.playStatusbarFullSound();
             return 5;
         } else if (this.bottleAmount >= 10) {
             return 5;
-        } else if (this.bottleAmount >= 8) {
+        } else if (this.bottleAmount >= 7) {
             return 4;
-        } else if (this.bottleAmount >= 6) {
+        } else if (this.bottleAmount >= 5) {
             return 3;
-        } else if (this.bottleAmount >= 4) {
+        } else if (this.bottleAmount >= 3) {
             return 2;
-        } else if (this.bottleAmount >= 2) {
+        } else if (this.bottleAmount >= 1) {
             return 1;
         } else {
             return 0;

@@ -7,19 +7,19 @@ class Chicken extends MovableObject {
    * Width of the chicken object.
    * @type {number}
    */
-  width = 50;
+  width = 80;
 
   /**
    * Height of the chicken object.
    * @type {number}
    */
-  height = 50;
+  height = 80;
 
   /**
    * Initial vertical position of the chicken object.
    * @type {number}
    */
-  y = 380;
+  y = 350;
 
   /**
    * Array of paths to images used when the chicken is walking.

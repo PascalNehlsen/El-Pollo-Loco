@@ -103,15 +103,7 @@ class Endboss extends MovableObject {
         this.animate();
     }
 
-    /**
-     * @type {HTMLAudioElement} - Audio played when the end boss is defeated.
-     */
-    win_sound = new Audio('./audio/win-sound.mp3');
 
-    /**
-     * @type {HTMLAudioElement} - Audio played when the end boss is hit.
-     */
-    endboss_hit = new Audio('./audio/endboss-hit.mp3');
 
     /**
      * Initiates the animation sequence for the end boss.
@@ -134,7 +126,7 @@ class Endboss extends MovableObject {
         for (const condition of this.conditions) {
             if (this.energy === condition.energyLevel && this.x > condition.xThreshold) {
                 if (!soundMuted) {
-                    this.endboss_hit.play();
+                    endboss_hit.play();
                 }
                 this.playAnimation(this.imagesHurt);
                 setTimeout(() => {
@@ -157,7 +149,7 @@ class Endboss extends MovableObject {
             document.getElementById('restart-game').style.display = 'flex';
             document.getElementById('legal').style.display = '';
             if (!soundMuted) {
-                this.win_sound.play();
+                win_sound.play();
             }
             this.clearAllIntervals();
         }, 1000);
@@ -168,6 +160,6 @@ class Endboss extends MovableObject {
      */
     clearAllIntervals() {
         for (let i = 1; i < 9999; i++) window.clearInterval(i);
-        this.game_sound.pause();
+        game_sound.pause();
     }
 }

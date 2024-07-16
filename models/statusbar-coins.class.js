@@ -50,7 +50,7 @@ class StatusBarCoins extends DrawableObject {
      */
     countCoins() {
         if (this.coinsAmount == 10) {
-            this.playStatusbarFullSound(); // Play sound if status bar is full
+            this.playStatusbarFullSound();
             return 5;
         } else if (this.coinsAmount >= 10) {
             return 5;

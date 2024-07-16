@@ -101,24 +101,10 @@ class Character extends MovableObject {
   /** @type {number} */
   speed = 5;
 
-  /** @type {Audio} */
-  walking_sound = new Audio('./audio/footsteps.mp3');
-
-  /** @type {Audio} */
-  jump_sound = new Audio('./audio/jump.mp3');
-
-  /** @type {Audio} */
-  snore_sound = new Audio('./audio/snore.mp3');
-
-  /** @type {Audio} */
-  hurt_sound = new Audio('./audio/hurt.mp3');
-
-  /** @type {Audio} */
-  smash_enemy = new Audio('./audio/smash-baby-chicken.mp3');
-
   /** @type {boolean} */
   gameStarted = false;
 
+  sleepTimer = null;
   /**
    * Creates an instance of Character.
    */
@@ -144,7 +130,7 @@ class Character extends MovableObject {
         this.speedY = 0;
         this.y = 140;
       }
-      this.walking_sound.pause();
+      walking_sound.pause();
       this.changeMovements();
       this.world.camera_x = -this.x + 100;
     }, 1000 / 60);
@@ -184,8 +170,8 @@ class Character extends MovableObject {
     this.otherDirection = false;
     if (!this.isAboveGround()) {
       if (!soundMuted) {
-        this.walking_sound.play();
-        this.walking_sound.playbackRate = 3;
+        walking_sound.play();
+        walking_sound.playbackRate = 3;
       }
     }
   }
@@ -200,8 +186,8 @@ class Character extends MovableObject {
     this.otherDirection = true;
     if (!this.isAboveGround()) {
       if (!soundMuted) {
-        this.walking_sound.play();
-        this.walking_sound.playbackRate = 3;
+        walking_sound.play();
+        walking_sound.playbackRate = 3;
       }
     }
   }
@@ -213,11 +199,11 @@ class Character extends MovableObject {
   jumpSound() {
     this.jump();
     if (!soundMuted) {
-      this.jump_sound.play();
+      jump_sound.play();
     }
-    this.snore_sound.pause();
+    snore_sound.pause();
     this.gameStarted = true;
-    this.jump_sound.playbackRate = 1.5;
+    jump_sound.playbackRate = 1.5;
   }
 
   /**
@@ -226,9 +212,9 @@ class Character extends MovableObject {
    */
   changeAnimationsOnWalk() {
     if (this.isDead()) {
-      this.game_sound.pause();
+      game_sound.pause();
       this.playAnimation(this.imagesDead);
-      this.snore_sound.pause();
+      snore_sound.pause();
     } else if (this.isHurt() && !this.isAboveGround()) {
       this.muteSound();
     } else if (this.world.keyboard.RIGHT && !this.isAboveGround() || this.world.keyboard.LEFT && !this.isAboveGround()) {
@@ -236,7 +222,7 @@ class Character extends MovableObject {
     }
     let bigChicken = this.world.level.enemies[this.world.level.enemies.length - 1];
     if (bigChicken.energy <= 0) {
-      this.game_sound.pause();
+      game_sound.pause();
     }
   }
 
@@ -246,11 +232,11 @@ class Character extends MovableObject {
    */
   muteSound() {
     if (!soundMuted) {
-      this.hurt_sound.play();
+      hurt_sound.play();
     }
     this.playAnimation(this.imagesHurt);
     this.gameStarted = true;
-    this.snore_sound.pause();
+    snore_sound.pause();
   }
 
   /**
@@ -260,13 +246,14 @@ class Character extends MovableObject {
   playStartAnimation() {
     this.playAnimation(this.imagesWalking);
     this.gameStarted = true;
-    this.snore_sound.pause();
+    snore_sound.pause();
     if (!(soundMuted && !onlyMusic) || (soundMuted && onlyMusic)) {
-      this.game_sound.volume = 0.02;
-      this.game_sound.play();
+      game_sound.volume = 0.02;
+      game_sound.play();
     }
   }
-
+  sleepTimer = null;
+  playLongIdleAnimation = false;
   /**
    * Plays the idle animation.
    * @private
@@ -275,12 +262,15 @@ class Character extends MovableObject {
     if (this.x < 100 && this.energy == 100 && !this.gameStarted) {
       this.playAnimation(this.imagesLongIdle);
       if (!soundMuted) {
-        this.snore_sound.play();
+        snore_sound.play();
       }
     }
     if (this.isAboveGround()) {
       this.playAnimation(this.imagesJumping);
       this.gameStarted = true;
+    }
+    if (this.gameStarted && !keyboard.RIGHT && !keyboard.LEFT && !keyboard.UP && !keyboard.DOWN && !keyboard.SPACE && !keyboard.D) {
+      this.playAnimation(this.imagesIdle);
     }
   }
 
@@ -290,7 +280,7 @@ class Character extends MovableObject {
    * @returns {boolean} True if the character is jumping on the object, false otherwise.
    */
   isJumpingOn(obj) {
-    return this.isColliding(obj) && this.isAboveGround();
+    return this.isColliding(obj) && this.isAboveGround() && this.speedY < 20;
   }
 
   /**
@@ -322,7 +312,7 @@ class Character extends MovableObject {
     if (enemy != bigChicken)
       enemy.energy = 0;
     if (!soundMuted) {
-      this.smash_enemy.play();
+      smash_enemy.play();
     }
     this.world.deleteDeadEnemy(enemy);
     this.jump();

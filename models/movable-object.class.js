@@ -21,8 +21,7 @@ class MovableObject extends DrawableObject {
   /** @type {number} */
   lastHit = 0;
 
-  /** @type {HTMLAudioElement} */
-  game_sound = new Audio('./audio/game-music.mp3');
+
 
   /** @type {{left: number, top: number, right: number, bottom: number}} */
   offset = {
@@ -109,7 +108,7 @@ class MovableObject extends DrawableObject {
     this.energy -= hitAmount;
     if (this.energy < 0) {
       this.energy = 0;
-      this.game_sound.pause();
+      game_sound.pause();
     } else {
       this.lastHit = new Date().getTime();
     }

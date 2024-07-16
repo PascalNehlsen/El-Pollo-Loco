@@ -21,7 +21,6 @@ function startGame() {
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('game-over').style.display = 'none';
     document.getElementById('game-win').style.display = 'none';
-    document.getElementById('menu-bar').style.display = 'none';
     document.getElementById('mobile-description-container').style.display = 'none';
     document.getElementById('legal').style.display = 'none';
     init();

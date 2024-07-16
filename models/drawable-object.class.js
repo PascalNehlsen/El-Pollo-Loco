@@ -24,20 +24,12 @@ class DrawableObject {
     width = 100;
 
     /**
-     * Creates a new DrawableObject.
-     */
-    constructor() {
-        /** @type {HTMLAudioElement} */
-        this.statusbar_full_sound = new Audio('./audio/bar-full.mp3');
-    }
-
-    /**
      * Plays the status bar full sound if sound is not muted.
      * @param {boolean} soundMuted - A boolean indicating if the sound is muted.
      */
     playStatusbarFullSound(soundMuted) {
         if (!soundMuted) {
-            this.statusbar_full_sound.play();
+            statusbar_full_sound.play();
         }
     }
 

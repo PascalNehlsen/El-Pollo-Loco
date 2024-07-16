@@ -3,17 +3,6 @@
  * @extends MovableObject
  */
 class ThrowableObject extends MovableObject {
-    /**
-     * @type {Audio}
-     * @private
-     */
-    throw_sound = new Audio('./audio/throw.mp3');
-
-    /**
-     * @type {Audio}
-     * @private
-     */
-    break_sound = new Audio('./audio/bottle-break.mp3');
 
     /**
      * @type {string[]}
@@ -73,7 +62,7 @@ class ThrowableObject extends MovableObject {
             this.playAnimation(this.imagesBottleRotation);
         }, 50);
         if (!soundMuted) {
-            this.throw_sound.play();
+            throw_sound.play();
         }
         this.checkHit();
     }
@@ -111,7 +100,7 @@ class ThrowableObject extends MovableObject {
         if (this.isColliding(enemy)) {
             this.playAnimation(this.imagesExplosion);
             if (!soundMuted) {
-                this.break_sound.play();
+                break_sound.play();
             }
         }
     }
